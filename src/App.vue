@@ -104,6 +104,16 @@ function getPositionAndDice(position: { coords: { latitude: any; longitude: any;
 }
 
 function register() {
+  if (registerUsername.value == "") {
+    alert("username is required")
+    return
+  }
+
+  if (registerPassword.value == "") {
+    alert("password is required")
+    return
+  }
+
   const registerUser = {
     name : registerUsername.value,
     password : registerPassword.value
