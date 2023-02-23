@@ -1,19 +1,12 @@
 <template>
   <header>
     <div class="wrapper">
-      <h1>Register</h1>
-      username: <input type="text" v-model="registerUsername" />
-      password: <input type="password" v-model="registerPassword" />
+      <h1>Register/Login</h1>
+      username: <input type="text" v-model="username" />
+      password: <input type="password" v-model="password" />
       <button @click="register()">register</button>
-
-      <hr>
-
-      <h1>Login</h1>
-      username: <input type="text" v-model="username" :disabled="isLogin" />
-      password: <input type="password" v-model="password" :disabled="isLogin"/>
       <button @click="login()" :disabled="isLogin">login</button>
       <button @click="logout()" :disabled="!isLogin">logout</button>
-      <br>
 
       <hr>
 
@@ -41,9 +34,6 @@
 import {ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, RADIUS} from "@/constant/MapDiceConstant";
-
-let registerUsername = ref("")
-let registerPassword = ref("")
 
 let username = ref("")
 let password = ref("")
@@ -104,26 +94,26 @@ function getPositionAndDice(position: { coords: { latitude: any; longitude: any;
 }
 
 function register() {
-  if (registerUsername.value == "") {
+  if (username.value == "") {
     alert("username is required")
     return
   }
 
-  if (registerPassword.value == "") {
+  if (password.value == "") {
     alert("password is required")
     return
   }
 
   const registerUser = {
-    name : registerUsername.value,
-    password : registerPassword.value
+    name : username.value,
+    password : password.value
   }
   axios.post(`${BACKEND_URL}/users/create`, registerUser)
       .then(res => {
         if(res.data.code == 200 && res.data.data == 1) {
           alert("successfully create user")
-          registerUsername.value = ""
-          registerPassword.value = ""
+          username.value = ""
+          password.value = ""
         } else {
           alert(res.data.data)
         }
