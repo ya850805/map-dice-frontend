@@ -2,8 +2,8 @@
   <header>
     <div class="wrapper">
       <h1>Register/Login</h1>
-      username: <input type="text" v-model="username" />
-      password: <input type="password" v-model="password" />
+      username: <input type="text" v-model="username"/>
+      password: <input type="password" v-model="password"/>
       <button @click="register()">register</button>
       <button @click="login()" :disabled="isLogin">login</button>
       <button @click="logout()" :disabled="!isLogin">logout</button>
@@ -21,10 +21,10 @@
       <hr>
 
       <div v-if="isLogin">
-        name : {{placeName}} <br>
-        rating: {{placeRating}} <br>
-        userRatingsTotal : {{placeUserRatingsTotal}} <br>
-        vicinity : {{placeVicinity}} <br>
+        name : {{ placeName }} <br>
+        rating: {{ placeRating }} <br>
+        userRatingsTotal : {{ placeUserRatingsTotal }} <br>
+        vicinity : {{ placeVicinity }} <br>
       </div>
     </div>
   </header>
@@ -46,7 +46,7 @@ let placeUserRatingsTotal = ref(0)
 let placeVicinity = ref("")
 
 function dice() {
-  if(type.value === "") {
+  if (type.value === "") {
     alert('Please choose one type.')
   } else {
     getLocationThenDice()
@@ -68,29 +68,29 @@ function getPositionAndDice(position: { coords: { latitude: any; longitude: any;
 
   axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`,
       {
-        auth : {
-          username : username.value,
-          password : password.value
+        auth: {
+          username: username.value,
+          password: password.value
         }
       }
   )
-  .then(res => {
-    console.log(res)
-    if(res.data.code == 200) {
-      const data = res.data.data
-      placeName.value = data.name
-      placeRating.value = data.rating
-      placeUserRatingsTotal.value = data.userRatingsTotal
-      placeVicinity.value = data.vicinity
-    } else {
-      alert(res.data.data)
-    }
-  })
-  .catch(err => {
-    if(err.response.status == 401) {
-      alert("login required...")
-    }
-  })
+      .then(res => {
+        console.log(res)
+        if (res.data.code == 200) {
+          const data = res.data.data
+          placeName.value = data.name
+          placeRating.value = data.rating
+          placeUserRatingsTotal.value = data.userRatingsTotal
+          placeVicinity.value = data.vicinity
+        } else {
+          alert(res.data.data)
+        }
+      })
+      .catch(err => {
+        if (err.response.status == 401) {
+          alert("login required...")
+        }
+      })
 }
 
 function register() {
@@ -105,12 +105,12 @@ function register() {
   }
 
   const registerUser = {
-    name : username.value,
-    password : password.value
+    name: username.value,
+    password: password.value
   }
   axios.post(`${BACKEND_URL}/users/create`, registerUser)
       .then(res => {
-        if(res.data.code == 200 && res.data.data == 1) {
+        if (res.data.code == 200 && res.data.data == 1) {
           alert("successfully create user")
           username.value = ""
           password.value = ""
@@ -131,7 +131,7 @@ function login() {
     return
   }
 
-  if(!isLogin) {
+  if (!isLogin) {
     alert("please login first")
     return
   }
@@ -139,7 +139,7 @@ function login() {
   axios.post(`${BACKEND_URL}/login?username=${username.value}&password=${password.value}`)
       .then(res => {
         alert(res.data.data)
-        if(res.data.code === 200) {
+        if (res.data.code === 200) {
           isLogin.value = true
         } else {
           username.value = ""
