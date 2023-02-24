@@ -159,6 +159,7 @@ function login() {
                 loginUser.value = res.data.data
               })
 
+          alert(res.data.data)
           username.value = ""
           password.value = ""
         } else {
