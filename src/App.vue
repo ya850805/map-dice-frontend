@@ -5,45 +5,67 @@
       username: <input type="text" v-model="username"/>
       password: <input type="password" v-model="password"/>
       <button @click="register()">register</button>
-      <button @click="login()" :disabled="isLogin">login</button>
-      <button @click="logout()" :disabled="!isLogin">logout</button>
+
+      <button @click="login()" v-if="loginUser == ''">login</button><br>
+      <div v-if="loginUser != ''">
+        Hi {{loginUser}}
+        <button @click="logout()">logout</button>
+      </div>
+
 
       <hr>
 
       <h1>Dice</h1>
-      Place type:
-      <select v-model="type" :disabled="!isLogin">
-        <option value="restaurant">restaurant</option>
-      </select>
-      <button @click="dice()" :disabled="!isLogin">Dice</button>
-      <br>
+      <div v-if="loginUser != ''">
+        Place type:
+        <select v-model="type">
+          <option value="restaurant">restaurant</option>
+        </select>
+        <button @click="dice()">Dice</button>
+        <br>
 
-      <hr>
+        <hr>
 
-      <div v-if="isLogin">
         name : {{ placeName }} <br>
         rating: {{ placeRating }} <br>
         userRatingsTotal : {{ placeUserRatingsTotal }} <br>
         vicinity : {{ placeVicinity }} <br>
       </div>
+
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 
+let loginUser = ref("")
 let username = ref("")
 let password = ref("")
-let isLogin = ref(false)
 
 let type = ref("")
 let placeName = ref("")
 let placeRating = ref(0)
 let placeUserRatingsTotal = ref(0)
 let placeVicinity = ref("")
+
+onMounted(() => {
+  const jwt = window.localStorage.getItem("jwt")
+  if(jwt != null) {
+    axios.get(`${BACKEND_URL}/users/${jwt}`)
+        .then(res => {
+          loginUser.value = res.data.data
+          axios.defaults.headers.common['Authorization'] = jwt
+        })
+        .catch(err => {
+          //jwt expired.
+          loginUser.value = ""
+          window.localStorage.removeItem("jwt")
+        })
+  }
+})
 
 function dice() {
   if (type.value === "") {
@@ -59,14 +81,10 @@ function getLocationThenDice() {
         const latitude = res.data.lat
         const longitude = res.data.lon
 
-        axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`,
-            {
-              auth: {
-                username: username.value,
-                password: password.value
-              }
-            }
-        )
+        console.log(latitude)
+        console.log(longitude)
+
+        axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
             .then(res => {
               if (res.data.code == 200) {
                 const data = res.data.data
@@ -81,6 +99,8 @@ function getLocationThenDice() {
             .catch(err => {
               if (err.response.status == 401) {
                 alert("login required...")
+                window.localStorage.removeItem("jwt")
+                loginUser.value = ""
               }
             })
       })
@@ -127,29 +147,36 @@ function login() {
     return
   }
 
-  if (!isLogin) {
-    alert("please login first")
-    return
-  }
-
   axios.post(`${BACKEND_URL}/login?username=${username.value}&password=${password.value}`)
       .then(res => {
-        alert(res.data.data)
         if (res.data.code === 200) {
-          isLogin.value = true
-        } else {
+          const jwt = res.headers.authorization
+          axios.defaults.headers.common['Authorization'] = jwt
+          window.localStorage.setItem("jwt", jwt)
+
+          axios.get(`${BACKEND_URL}/users/${jwt}`)
+              .then(res => {
+                loginUser.value = res.data.data
+              })
+
           username.value = ""
           password.value = ""
-          isLogin.value = false
+        } else {
+          alert(res.data.data)
+          username.value = ""
+          password.value = ""
         }
       })
 }
 
 function logout() {
-  isLogin.value = false
+  axios.defaults.headers.common['Authorization'] = ""
+  window.localStorage.removeItem("jwt")
+  loginUser.value = ''
   username.value = ""
   password.value = ""
 }
+
 </script>
 
 <style scoped>
