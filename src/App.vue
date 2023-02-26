@@ -26,6 +26,7 @@
 
         <hr>
 
+        placeId : {{ placeId }} <br>
         name : {{ placeName }} <br>
         rating: {{ placeRating }} <br>
         userRatingsTotal : {{ placeUserRatingsTotal }} <br>
@@ -46,6 +47,7 @@ let username = ref("")
 let password = ref("")
 
 let type = ref("")
+let placeId = ref("")
 let placeName = ref("")
 let placeRating = ref(0)
 let placeUserRatingsTotal = ref(0)
@@ -88,9 +90,11 @@ function getLocationThenDice() {
             .then(res => {
               if (res.data.code == 200) {
                 const data = res.data.data
+                console.log(data)
+                placeId.value = data.place_id
                 placeName.value = data.name
                 placeRating.value = data.rating
-                placeUserRatingsTotal.value = data.userRatingsTotal
+                placeUserRatingsTotal.value = data.user_ratings_total
                 placeVicinity.value = data.vicinity
               } else {
                 alert(res.data.data)
@@ -105,6 +109,7 @@ function getLocationThenDice() {
             })
       })
       .catch(err => {
+        console.log(err)
         alert('get user location occurs error...')
       })
 }
