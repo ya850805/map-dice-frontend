@@ -6,10 +6,10 @@
       password: <input type="password" v-model="password"/>
       <button @click="register()">register</button>
 
-      <button @click="login()" v-if="loginUser == ''">login</button><br>
+      <button @click="login" v-if="loginUser == ''">login</button><br>
       <div v-if="loginUser != ''">
         Hi {{loginUser}}
-        <button @click="logout()">logout</button>
+        <button @click="logout">logout</button>
       </div>
 
 
@@ -21,16 +21,24 @@
         <select v-model="type">
           <option value="restaurant">restaurant</option>
         </select>
-        <button @click="dice()">Dice</button>
+        <button @click="dice">Dice</button>
         <br>
 
         <hr>
 
         placeId : {{ placeId }} <br>
         name : {{ placeName }} <br>
-        rating: {{ placeRating }} <br>
+        rating : {{ placeRating }} <br>
         userRatingsTotal : {{ placeUserRatingsTotal }} <br>
         vicinity : {{ placeVicinity }} <br>
+        <button @click="getPlaceDetail">detail</button>
+
+        <br>
+        <span v-if="isDetailOpen">
+          address : {{ detailAddress }} <br>
+          google map url : {{ detailUrl }} <br>
+          website : {{ detailWebsite }} <br>
+        </span>
       </div>
 
     </div>
@@ -52,6 +60,12 @@ let placeName = ref("")
 let placeRating = ref(0)
 let placeUserRatingsTotal = ref(0)
 let placeVicinity = ref("")
+
+let isDetailOpen = ref(false)
+let detailAddress = ref("")
+let detailUrl = ref("")
+let detailWebsite = ref("")
+//TODO add reviews to detail
 
 onMounted(() => {
   const jwt = window.localStorage.getItem("jwt")
@@ -111,6 +125,26 @@ function getLocationThenDice() {
       .catch(err => {
         console.log(err)
         alert('get user location occurs error...')
+      })
+}
+
+function getPlaceDetail() {
+  const id = placeId.value
+  if(id == '') {
+    alert('please dice first.')
+    return
+  }
+
+  isDetailOpen.value = true
+  axios.get(`${BACKEND_URL}/place/${id}`)
+      .then(res => {
+        const data = res.data.data
+        detailAddress.value = data.formatted_address
+        detailUrl.value = data.url
+        detailWebsite.value = data.website
+      })
+      .catch(err => {
+        alert("get place detail occurs error")
       })
 }
 
