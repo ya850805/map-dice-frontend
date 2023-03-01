@@ -4,16 +4,16 @@ input {
     flex-direction: row;
     align-items: center;
     padding: 10px 12px;
-    min-width: 100%;
-    width: 448px;
+
+    width: auto;
     height: 40px;
     max-height: 40px;
+    margin-bottom: 8px;
 
     background: var(--white);
     color: var(--txt-default);
     border: 1px solid var(--sec-gray);
     border-radius: 10px;
-
 }
 
 /* @元件-按鈕 primary---------------------------------------------------------------------------------------------- */
@@ -24,34 +24,44 @@ button {
     align-items: center;
     padding: 14px 16px;
 
-    width: 448px;
+    width: 100%;
     height: 48px;
     max-height: 48px;
-    margin-top: 40px;
+    margin-bottom: 16px;
 
     /* primary */
     background: var(--primary);
     color: var(--white);
     border: 1px solid var(--primary);
     border-radius: 10px;
+    cursor: pointer;
 }
 
-button.btn-sec{
+button.btn-sec {
     background: var(--white);
     color: var(--txt-default);
     border: 1px solid var(--sec-gray);
 }
 
 /* @圖示-image ---------------------------------------------------------------------------------------------- */
+.img-open {
+    background-image: url("images/img-open.png");
+    width: 222px;
+    height: 222px;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .img-bg-top-L {
     /*display: block; */
     position: absolute;
-    top: -12px;
-    left: -10px;
+    top: 0;
+    left: 0;
     background-image: url("images/bg-top-L.png");
     width: 648px;
     height: 170px;
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .img-bg-top-R {
@@ -62,15 +72,17 @@ button.btn-sec{
     background-image: url("images/bg-top-R.png");
     width: 122px;
     height: 123px;
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .img-bg-bottom {
     /*display: block;*/
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-image: url("images/bg-bottom.png");
     width: 1682px;
     height: 482px;
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
