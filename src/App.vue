@@ -1,40 +1,47 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <h1>Register/Login</h1>
-      username: <input type="text" v-model="username"/>
-      password: <input type="password" v-model="password"/>
-      <button @click="register()">register</button>
+  <div class="img-bg-top-L"></div>
+  <div class="img-bg-top-R"></div>
+  <div class="img-bg-bottom"></div>
 
-      <button @click="login" v-if="loginUser == ''">login</button><br>
-      <div v-if="loginUser != ''">
-        Hi {{loginUser}}
-        <button @click="logout">logout</button>
-      </div>
+  <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>
+  <div class="flex-col">
+    <p>username:</p>
+    <input type="text" v-model="username"/>
+  </div>
+  <div class="flex-col">
+    <p>password</p>
+    <input type="password" v-model="password"/>
+  </div>
 
+  <button @click="register()">Register</button>
+  <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
+  <div v-if="loginUser != ''">
+    Hi {{ loginUser }}
+    <button class="btn-sec" @click="logout">logout</button>
+  </div>
 
-      <hr>
+  <hr>
 
-      <h1>Dice</h1>
-      <div v-if="loginUser != ''">
-        Place type:
-        <select v-model="type">
-          <option value="restaurant">restaurant</option>
-        </select>
-        <button @click="dice">Dice</button>
-        <br>
+  <h1>Dice</h1>
+  <div v-if="loginUser != ''">
+    Place type:
+    <select v-model="type">
+      <option value="restaurant">restaurant</option>
+    </select>
+    <button @click="dice">Dice</button>
+    <br>
 
-        <hr>
+    <hr>
 
-        placeId : {{ placeId }} <br>
-        name : {{ placeName }} <br>
-        rating : {{ placeRating }} <br>
-        userRatingsTotal : {{ placeUserRatingsTotal }} <br>
-        vicinity : {{ placeVicinity }} <br>
-        <button @click="getPlaceDetail">detail</button>
+    placeId : {{ placeId }} <br>
+    name : {{ placeName }} <br>
+    rating : {{ placeRating }} <br>
+    userRatingsTotal : {{ placeUserRatingsTotal }} <br>
+    vicinity : {{ placeVicinity }} <br>
+    <button @click="getPlaceDetail">detail</button>
 
-        <br>
-        <span v-if="isDetailOpen">
+    <br>
+    <span v-if="isDetailOpen">
           address : {{ detailAddress }} <br>
           google map url : {{ detailUrl }} <br>
           website : {{ detailWebsite }} <br>
@@ -47,10 +54,7 @@
             <hr>
           </span>
         </span>
-      </div>
-
-    </div>
-  </header>
+  </div>
 </template>
 
 <script setup lang="ts">
