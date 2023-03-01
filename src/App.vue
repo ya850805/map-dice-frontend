@@ -4,7 +4,7 @@
   <div class="img-bg-bottom"></div>
   <div class="function-content">
     <div class="img-open"></div>
-<!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
+    <!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
     <div class="flex-col w-100">
       <p>username:</p>
       <input type="text" v-model="username"/>
@@ -25,8 +25,7 @@
 
     <hr>
 
-    <!--  <div v-if="loginUser != ''">-->
-    <div>
+    <div v-if="loginUser != ''">
       <h1>Dice</h1>
       Place type:
       <select v-model="type">
