@@ -2,46 +2,49 @@
   <div class="img-bg-top-L"></div>
   <div class="img-bg-top-R"></div>
   <div class="img-bg-bottom"></div>
+  <div class="function-content">
+    <div class="img-open"></div>
+    <!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
+    <div class="flex-col w-100">
+      <p>username:</p>
+      <input type="text" v-model="username"/>
+    </div>
+    <div class="flex-col w-100">
+      <p>password</p>
+      <input type="password" v-model="password"/>
+    </div>
 
-  <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>
-  <div class="flex-col">
-    <p>username:</p>
-    <input type="text" v-model="username"/>
-  </div>
-  <div class="flex-col">
-    <p>password</p>
-    <input type="password" v-model="password"/>
-  </div>
-
-  <button @click="register()">Register</button>
-  <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
-  <div v-if="loginUser != ''">
-    Hi {{ loginUser }}
-    <button class="btn-sec" @click="logout">logout</button>
-  </div>
-
-  <hr>
-
-  <h1>Dice</h1>
-  <div v-if="loginUser != ''">
-    Place type:
-    <select v-model="type">
-      <option value="restaurant">restaurant</option>
-    </select>
-    <button @click="dice">Dice</button>
-    <br>
+    <div class="flex-col w-100 mt-48">
+      <button @click="register()">Register</button>
+      <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
+      <div v-if="loginUser != ''">
+        Hi {{ loginUser }}
+        <button class="btn-sec" @click="logout">logout</button>
+      </div>
+    </div>
 
     <hr>
 
-    placeId : {{ placeId }} <br>
-    name : {{ placeName }} <br>
-    rating : {{ placeRating }} <br>
-    userRatingsTotal : {{ placeUserRatingsTotal }} <br>
-    vicinity : {{ placeVicinity }} <br>
-    <button @click="getPlaceDetail">detail</button>
+    <div v-if="loginUser != ''">
+      <h1>Dice</h1>
+      Place type:
+      <select v-model="type">
+        <option value="restaurant">restaurant</option>
+      </select>
+      <button @click="dice">Dice</button>
+      <br>
 
-    <br>
-    <span v-if="isDetailOpen">
+      <hr>
+
+      placeId : {{ placeId }} <br>
+      name : {{ placeName }} <br>
+      rating : {{ placeRating }} <br>
+      userRatingsTotal : {{ placeUserRatingsTotal }} <br>
+      vicinity : {{ placeVicinity }} <br>
+      <button @click="getPlaceDetail">detail</button>
+
+      <br>
+      <span v-if="isDetailOpen">
           address : {{ detailAddress }} <br>
           google map url : {{ detailUrl }} <br>
           website : {{ detailWebsite }} <br>
@@ -54,6 +57,7 @@
             <hr>
           </span>
         </span>
+    </div>
   </div>
 </template>
 
@@ -81,7 +85,7 @@ let detailReviews: any[] = ref([]).value
 
 onMounted(() => {
   const jwt = window.localStorage.getItem("jwt")
-  if(jwt != null) {
+  if (jwt != null) {
     axios.get(`${BACKEND_URL}/users/${jwt}`)
         .then(res => {
           loginUser.value = res.data.data
@@ -142,7 +146,7 @@ function getLocationThenDice() {
 
 function getPlaceDetail() {
   const id = placeId.value
-  if(id == '') {
+  if (id == '') {
     alert('please dice first.')
     return
   }
@@ -160,10 +164,10 @@ function getPlaceDetail() {
         reviews.forEach(r => {
           detailReviews.push(
               {
-                "author_name" : r.author_name,
-                "rating" : r.rating,
-                "relative_time_description" : r.relative_time_description,
-                "text" : r.text
+                "author_name": r.author_name,
+                "rating": r.rating,
+                "relative_time_description": r.relative_time_description,
+                "text": r.text
               }
           )
         })

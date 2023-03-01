@@ -2,10 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     flex-direction: column;
-    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    padding: 24px;
     position: relative;
+    background: radial-gradient(50% 50% at 50% 50%, #AAB3FE 0%, #9EAAFF 71.18%, #8D9DFF 100%);
+
+    /*min-height: 100vh;*/
     /*height: 100%;*/
 }
 
@@ -20,12 +25,14 @@
 body {
     /*display: flex;*/
     width: 100vw;
-    height:100vh;
-    position: relative;
+    height: 100vh;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    margin: 0!important;
+    padding: 0!important;
     line-height: 20px;
     /*justify-content: center;*/
     /*align-items: center;*/
@@ -33,13 +40,28 @@ body {
     /*background: var(--gradient-bg);*/
     /*background-image: url("../images/img_bg.png");*/
     /*background-size: cover;*/
-    background: radial-gradient(50% 50% at 50% 50%, #AAB3FE 0%, #9EAAFF 71.18%, #8D9DFF 100%);
     /*background-image: url(./images/bg-top-L.png), url(./images/bg-top-R.png),url(./images/bg-bottom.png);*/
     font-family: 'Manrope';
     font-size: var(--font-size-base);
     color: var(--txt-default);
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.function-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 448px;
+    min-width: auto;
+    /*margin: 0 16px;*/
+}
+
+.function-content img,p, button, input, i, svg {
+    z-index: 1;
+    width: 100%;
 }
 
 /*a,*/
