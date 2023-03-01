@@ -1,33 +1,40 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <h1>Register/Login</h1>
-      username: <input type="text" v-model="username"/>
-      password: <input type="password" v-model="password"/>
-      <button @click="register()">register</button>
-      <button @click="login()" :disabled="isLogin">login</button>
-      <button @click="logout()" :disabled="!isLogin">logout</button>
+  <div class="img-bg-top-L"></div>
+  <div class="img-bg-top-R"></div>
+  <div class="img-bg-bottom"></div>
 
-      <hr>
+  <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>
+  <div class="flex-col">
+    <p>username:</p>
+    <input type="text" v-model="username"/>
+  </div>
+  <div class="flex-col">
+    <p>password</p>
+    <input type="password" v-model="password"/>
+  </div>
 
-      <h1>Dice</h1>
-      Place type:
-      <select v-model="type" :disabled="!isLogin">
-        <option value="restaurant">restaurant</option>
-      </select>
-      <button @click="dice()" :disabled="!isLogin">Dice</button>
-      <br>
+  <button @click="register()" >Register</button>
+  <button class="btn-sec" @click="login()" :disabled="isLogin">Login</button>
+  <button class="btn-sec" @click="logout()" :disabled="!isLogin">Logout</button>
 
-      <hr>
+  <hr>
 
-      <div v-if="isLogin">
-        name : {{ placeName }} <br>
-        rating: {{ placeRating }} <br>
-        userRatingsTotal : {{ placeUserRatingsTotal }} <br>
-        vicinity : {{ placeVicinity }} <br>
-      </div>
-    </div>
-  </header>
+  <h1>Dice</h1>
+  Place type:
+  <select v-model="type" :disabled="!isLogin">
+    <option value="restaurant">restaurant</option>
+  </select>
+  <button @click="dice()" :disabled="!isLogin">Dice</button>
+  <br>
+
+  <hr>
+
+  <div v-if="isLogin">
+    name : {{ placeName }} <br>
+    rating: {{ placeRating }} <br>
+    userRatingsTotal : {{ placeUserRatingsTotal }} <br>
+    vicinity : {{ placeVicinity }} <br>
+  </div>
 </template>
 
 <script setup lang="ts">

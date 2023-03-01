@@ -2,8 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 96px);
-    height: calc(100% - 96px);
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    /*height: 100%;*/
 }
 
 /*#app {*/
@@ -15,17 +18,23 @@
 /*}*/
 
 body {
-    display: flex;
+    /*display: flex;*/
     width: 100vw;
-    height: 90ch;
-    justify-content: center;
-    align-items: center;
+    height:100vh;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 20px;
+    /*justify-content: center;*/
+    /*align-items: center;*/
 
     /*background: var(--gradient-bg);*/
     /*background-image: url("../images/img_bg.png");*/
-    background-size: cover;
+    /*background-size: cover;*/
     background: radial-gradient(50% 50% at 50% 50%, #AAB3FE 0%, #9EAAFF 71.18%, #8D9DFF 100%);
-
+    /*background-image: url(./images/bg-top-L.png), url(./images/bg-top-R.png),url(./images/bg-bottom.png);*/
     font-family: 'Manrope';
     font-size: var(--font-size-base);
     color: var(--txt-default);
@@ -33,28 +42,28 @@ body {
     overflow-y: auto;
 }
 
-a,
-.green {
-    text-decoration: none;
-    color: hsla(160, 100%, 37%, 1);
-    transition: 0.4s;
-}
+/*a,*/
+/*.green {*/
+/*    text-decoration: none;*/
+/*    color: hsla(160, 100%, 37%, 1);*/
+/*    transition: 0.4s;*/
+/*}*/
 
-@media (hover: hover) {
-    a:hover {
-        background-color: hsla(160, 100%, 37%, 0.2);
-    }
-}
+/*@media (hover: hover) {*/
+/*    a:hover {*/
+/*        background-color: hsla(160, 100%, 37%, 0.2);*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1024px) {
-    body {
-        display: flex;
-        place-items: center;
-    }
+/*@media (min-width: 1024px) {*/
+/*    body {*/
+/*        display: flex;*/
+/*        place-items: center;*/
+/*    }*/
 
-    #app {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 0 2rem;
-    }
-}
+/*    #app {*/
+/*        display: grid;*/
+/*        grid-template-columns: 1fr 1fr;*/
+/*        padding: 0 2rem;*/
+/*    }*/
+/*}*/

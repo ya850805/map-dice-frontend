@@ -7,7 +7,7 @@
 
     /*白色*/
     --white: #fff;
-    --sec-gray:#C6CACE;
+    --sec-gray: #C6CACE;
     /*--white-70: #ffffff70;*/
 
     /*灰色*/
@@ -52,6 +52,24 @@ h3, .fz-h3 {
 h4, .fz-h4 {
     font-size: var(--font-h4);
     line-height: 24px
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 /*@media (prefers-color-scheme: dark) {*/
