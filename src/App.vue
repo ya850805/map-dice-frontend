@@ -38,6 +38,14 @@
           address : {{ detailAddress }} <br>
           google map url : {{ detailUrl }} <br>
           website : {{ detailWebsite }} <br>
+          reviews : <br>
+          <span v-for="review in detailReviews">
+            authorName : {{ review.author_name }} <br>
+            rating : {{ review.rating }} <br>
+            time : {{ review.relative_time_description }} <br>
+            text : {{ review.text }} <br>
+            <hr>
+          </span>
         </span>
       </div>
 
@@ -46,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 
@@ -65,7 +73,7 @@ let isDetailOpen = ref(false)
 let detailAddress = ref("")
 let detailUrl = ref("")
 let detailWebsite = ref("")
-//TODO add reviews to detail
+let detailReviews: any[] = ref([]).value
 
 onMounted(() => {
   const jwt = window.localStorage.getItem("jwt")
@@ -139,9 +147,22 @@ function getPlaceDetail() {
   axios.get(`${BACKEND_URL}/place/${id}`)
       .then(res => {
         const data = res.data.data
+        console.log(res)
         detailAddress.value = data.formatted_address
         detailUrl.value = data.url
         detailWebsite.value = data.website
+
+        const reviews: any[] = data.reviews
+        reviews.forEach(r => {
+          detailReviews.push(
+              {
+                "author_name" : r.author_name,
+                "rating" : r.rating,
+                "relative_time_description" : r.relative_time_description,
+                "text" : r.text
+              }
+          )
+        })
       })
       .catch(err => {
         alert("get place detail occurs error")
@@ -216,7 +237,6 @@ function logout() {
   username.value = ""
   password.value = ""
 }
-
 </script>
 
 <style scoped>
