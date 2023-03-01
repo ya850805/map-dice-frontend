@@ -48,6 +48,7 @@
           address : {{ detailAddress }} <br>
           google map url : {{ detailUrl }} <br>
           website : {{ detailWebsite }} <br>
+          phone number : {{ detailPhoneNumber }} <br>
           reviews : <br>
           <span v-for="review in detailReviews">
             authorName : {{ review.author_name }} <br>
@@ -82,6 +83,7 @@ let detailAddress = ref("")
 let detailUrl = ref("")
 let detailWebsite = ref("")
 let detailReviews: any[] = ref([]).value
+let detailPhoneNumber = ref("")
 
 onMounted(() => {
   const jwt = window.localStorage.getItem("jwt")
@@ -113,14 +115,11 @@ function getLocationThenDice() {
         const latitude = res.data.lat
         const longitude = res.data.lon
 
-        console.log(latitude)
-        console.log(longitude)
-
         axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
             .then(res => {
+              console.log(res)
               if (res.data.code == 200) {
                 const data = res.data.data
-                console.log(data)
                 placeId.value = data.place_id
                 placeName.value = data.name
                 placeRating.value = data.rating
@@ -159,6 +158,7 @@ function getPlaceDetail() {
         detailAddress.value = data.formatted_address
         detailUrl.value = data.url
         detailWebsite.value = data.website
+        detailPhoneNumber.value = data.formatted_phone_number
 
         const reviews: any[] = data.reviews
         reviews.forEach(r => {
