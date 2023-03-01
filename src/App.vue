@@ -13,9 +13,13 @@
     <input type="password" v-model="password"/>
   </div>
 
-  <button @click="register()" >Register</button>
-  <button class="btn-sec" @click="login()" :disabled="isLogin">Login</button>
-  <button class="btn-sec" @click="logout()" :disabled="!isLogin">Logout</button>
+  <button @click="register()">Register</button>
+  <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
+
+  <div class="btn-sec" v-if="loginUser != ''">
+    Hi {{ loginUser }}
+    <button @click="logout">logout</button>
+  </div>
 
   <hr>
 
@@ -26,31 +30,84 @@
   </select>
   <button @click="dice()" :disabled="!isLogin">Dice</button>
   <br>
+  <h1>Dice</h1>
+  <div v-if="loginUser != ''">
+    Place type:
+    <select v-model="type">
+      <option value="restaurant">restaurant</option>
+    </select>
+    <button @click="dice">Dice</button>
+    <br>
 
-  <hr>
+    <hr>
 
-  <div v-if="isLogin">
+    <div v-if="isLogin">
+      name : {{ placeName }} <br>
+      rating: {{ placeRating }} <br>
+      userRatingsTotal : {{ placeUserRatingsTotal }} <br>
+      vicinity : {{ placeVicinity }} <br>
+    </div>
+    placeId : {{ placeId }} <br>
     name : {{ placeName }} <br>
-    rating: {{ placeRating }} <br>
+    rating : {{ placeRating }} <br>
     userRatingsTotal : {{ placeUserRatingsTotal }} <br>
     vicinity : {{ placeVicinity }} <br>
+    <button @click="getPlaceDetail">detail</button>
+
+    <br>
+    <span v-if="isDetailOpen">
+          address : {{ detailAddress }} <br>
+          google map url : {{ detailUrl }} <br>
+          website : {{ detailWebsite }} <br>
+          reviews : <br>
+          <span v-for="review in detailReviews">
+            authorName : {{ review.author_name }} <br>
+            rating : {{ review.rating }} <br>
+            time : {{ review.relative_time_description }} <br>
+            text : {{ review.text }} <br>
+            <hr>
+          </span>
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
-import {BACKEND_URL, RADIUS} from "@/constant/MapDiceConstant";
+import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 
+let loginUser = ref("")
 let username = ref("")
 let password = ref("")
-let isLogin = ref(false)
 
 let type = ref("")
+let placeId = ref("")
 let placeName = ref("")
 let placeRating = ref(0)
 let placeUserRatingsTotal = ref(0)
 let placeVicinity = ref("")
+
+let isDetailOpen = ref(false)
+let detailAddress = ref("")
+let detailUrl = ref("")
+let detailWebsite = ref("")
+let detailReviews: any[] = ref([]).value
+
+onMounted(() => {
+  const jwt = window.localStorage.getItem("jwt")
+  if(jwt != null) {
+    axios.get(`${BACKEND_URL}/users/${jwt}`)
+        .then(res => {
+          loginUser.value = res.data.data
+          axios.defaults.headers.common['Authorization'] = jwt
+        })
+        .catch(err => {
+          //jwt expired.
+          loginUser.value = ""
+          window.localStorage.removeItem("jwt")
+        })
+  }
+})
 
 function dice() {
   if (type.value === "") {
@@ -61,17 +118,13 @@ function dice() {
 }
 
 function getLocationThenDice() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(getPositionAndDice);
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
+  axios.get(GET_LOCATION_API_URL)
+      .then(res => {
+        const latitude = res.data.lat
+        const longitude = res.data.lon
 
-function getPositionAndDice(position: { coords: { latitude: any; longitude: any; }; }) {
-  const latitude = position.coords.latitude
-  const longitude = position.coords.longitude
-  console.log(`latitude=${latitude} longitude=${longitude}`);
+        console.log(latitude)
+        console.log(longitude)
 
   axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`,
       {
@@ -97,6 +150,65 @@ function getPositionAndDice(position: { coords: { latitude: any; longitude: any;
         if (err.response.status == 401) {
           alert("login required...")
         }
+      })
+        axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
+            .then(res => {
+              if (res.data.code == 200) {
+                const data = res.data.data
+                console.log(data)
+                placeId.value = data.place_id
+                placeName.value = data.name
+                placeRating.value = data.rating
+                placeUserRatingsTotal.value = data.user_ratings_total
+                placeVicinity.value = data.vicinity
+              } else {
+                alert(res.data.data)
+              }
+            })
+            .catch(err => {
+              if (err.response.status == 401) {
+                alert("login required...")
+                window.localStorage.removeItem("jwt")
+                loginUser.value = ""
+              }
+            })
+      })
+      .catch(err => {
+        console.log(err)
+        alert('get user location occurs error...')
+      })
+}
+
+function getPlaceDetail() {
+  const id = placeId.value
+  if(id == '') {
+    alert('please dice first.')
+    return
+  }
+
+  isDetailOpen.value = true
+  axios.get(`${BACKEND_URL}/place/${id}`)
+      .then(res => {
+        const data = res.data.data
+        console.log(res)
+        detailAddress.value = data.formatted_address
+        detailUrl.value = data.url
+        detailWebsite.value = data.website
+
+        const reviews: any[] = data.reviews
+        reviews.forEach(r => {
+          detailReviews.push(
+              {
+                "author_name" : r.author_name,
+                "rating" : r.rating,
+                "relative_time_description" : r.relative_time_description,
+                "text" : r.text
+              }
+          )
+        })
+      })
+      .catch(err => {
+        alert("get place detail occurs error")
       })
 }
 
@@ -148,16 +260,31 @@ function login() {
         alert(res.data.data)
         if (res.data.code === 200) {
           isLogin.value = true
-        } else {
+        if (res.data.code === 200) {
+          const jwt = res.headers.authorization
+          axios.defaults.headers.common['Authorization'] = jwt
+          window.localStorage.setItem("jwt", jwt)
+
+          axios.get(`${BACKEND_URL}/users/${jwt}`)
+              .then(res => {
+                loginUser.value = res.data.data
+              })
+
+          alert(res.data.data)
           username.value = ""
           password.value = ""
-          isLogin.value = false
+        } else {
+          alert(res.data.data)
+          username.value = ""
+          password.value = ""
         }
       })
 }
 
 function logout() {
-  isLogin.value = false
+  axios.defaults.headers.common['Authorization'] = ""
+  window.localStorage.removeItem("jwt")
+  loginUser.value = ''
   username.value = ""
   password.value = ""
 }
