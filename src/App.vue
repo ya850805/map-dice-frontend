@@ -14,7 +14,7 @@
       <input type="password" v-model="password"/>
     </div>
 
-    <div class="flex-col w-100 mt-48">
+    <div class="flex-col w-100 mt-40">
       <button @click="register()">Register</button>
       <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
       <div v-if="loginUser != ''">
@@ -25,25 +25,27 @@
 
     <hr>
 
-    <div v-if="loginUser != ''">
-      <h1>Dice</h1>
-      Place type:
-      <select v-model="type">
-        <option value="restaurant">restaurant</option>
-      </select>
-      <button @click="dice">Dice</button>
-      <br>
+    <!--    <div v-if="loginUser != ''"> -->
+    <div class="w-100">
+      <h2 class="txt_white">Choose at random</h2>
 
-      <hr>
+      <div class="flex-col w-100">
+        <p>Place type:</p>
+        <select v-model="type">
+          <option value="restaurant">restaurant</option>
+        </select>
+      </div>
 
-      placeId : {{ placeId }} <br>
-      name : {{ placeName }} <br>
-      rating : {{ placeRating }} <br>
-      userRatingsTotal : {{ placeUserRatingsTotal }} <br>
-      vicinity : {{ placeVicinity }} <br>
-      <button @click="getPlaceDetail">detail</button>
+      <button class="mt-40" @click="dice">Go Dice</button>
+      <div class="card_content">
+        <p>placeId : {{ placeId }}</p>
+        <p>name : {{ placeName }}</p>
+        <p>rating : {{ placeRating }}</p>
+        <p>userRatingsTotal : {{ placeUserRatingsTotal }}</p>
+        <p>vicinity : {{ placeVicinity }}</p>
+        <button class="btn-sec" @click="getPlaceDetail">Detail</button>
+      </div>
 
-      <br>
       <span v-if="isDetailOpen">
           address : {{ detailAddress }} <br>
           google map url : {{ detailUrl }} <br>

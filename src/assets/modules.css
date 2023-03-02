@@ -1,19 +1,20 @@
 /* @元件 - input select --------------------------------------------------------------------------------------------- */
-input {
+input, select {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px 12px;
+    padding: 0 16px;
 
     width: auto;
-    height: 40px;
-    max-height: 40px;
+    height: 48px;
+    max-height: 48px;
     margin-bottom: 8px;
 
     background: var(--white);
     color: var(--txt-default);
     border: 1px solid var(--sec-gray);
     border-radius: 10px;
+    font-family: "Manrope";
 }
 
 /* @元件-按鈕 primary---------------------------------------------------------------------------------------------- */
@@ -22,11 +23,11 @@ button {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 14px 16px;
+    padding: 0 16px;
 
     width: 100%;
-    height: 48px;
-    max-height: 48px;
+    height: 40px;
+    max-height: 40px;
     margin-bottom: 16px;
 
     /* primary */
@@ -35,6 +36,7 @@ button {
     border: 1px solid var(--primary);
     border-radius: 10px;
     cursor: pointer;
+    font-family: "Manrope";
 }
 
 button.btn-sec {
@@ -53,36 +55,45 @@ button.btn-sec {
 }
 
 .img-bg-top-L {
-    /*display: block; */
     position: absolute;
     top: 0;
     left: 0;
     background-image: url("images/bg-top-L.png");
-    width: 648px;
+
+    width: 100%;
     height: 170px;
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
     z-index: 0;
     pointer-events: none;
 }
 
 .img-bg-top-R {
-    /*display: block;*/
     position: absolute;
     top: 0;
     right: 0;
     background-image: url("images/bg-top-R.png");
+
     width: 122px;
     height: 123px;
+    background-size: 100%;
+    background-repeat: no-repeat;
     z-index: 0;
     pointer-events: none;
 }
 
 .img-bg-bottom {
-    /*display: block;*/
     position: fixed;
     bottom: 0;
+    left: 0;
     background-image: url("images/bg-bottom.png");
-    width: 1682px;
-    height: 482px;
+
+    width: 100%;
+    height: 480px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
     z-index: 0;
     pointer-events: none;
 }

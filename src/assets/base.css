@@ -32,14 +32,16 @@
 
 h1, .fz-h1 {
     font-size: var(--font-h1);
-    font-family: 'Playfair Display';
     line-height: 112px;
     letter-spacing: 10px;
+    font-family: "Playfair Display";
 }
 
 h2, .fz-h2 {
     font-size: var(--font-h2);
-    font-family: 'Itim';
+    font-family: "Itim";
+    text-align: center;
+    color: var(--white);
     /*line-height: 48px*/
 }
 
@@ -72,9 +74,13 @@ h4, .fz-h4 {
     width: 100%;
 }
 
-.mt-48 {
-    margin-top: 48px;
+.mt-40 {
+    margin-top: 40px;
 }
+
+/*.txt_white {*/
+/*    color: var(--white);*/
+/*}*/
 
 
 /*@media (prefers-color-scheme: dark) {*/
