@@ -14,50 +14,116 @@
       <input type="password" v-model="password"/>
     </div>
 
-    <div class="flex-col w-100 mt-48">
+    <div class="flex-col w-100 mt-40">
       <button @click="register()">Register</button>
       <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
-      <div v-if="loginUser != ''">
-        Hi {{ loginUser }}
-        <button class="btn-sec" @click="logout">logout</button>
+
+      <div class="flex-row-sb mt-40" v-if="loginUser != ''">
+        <p>Hi ~ {{ loginUser }}</p>
+        <i class="i-logout" @click="logout"></i>
       </div>
     </div>
 
     <hr>
 
-    <div v-if="loginUser != ''">
-      <h1>Dice</h1>
-      Place type:
-      <select v-model="type">
-        <option value="restaurant">restaurant</option>
-      </select>
-      <button @click="dice">Dice</button>
-      <br>
+    <div class="w-100" v-if="loginUser != ''">
+      <!--    <div class="w-100">-->
+      <h2 class="txt_white">Choose at random</h2>
+      <div class="flex-col w-100">
+        <p>Place type:</p>
+        <select v-model="type">
+          <option value="restaurant">restaurant</option>
+        </select>
+      </div>
 
-      <hr>
+      <button class="mt-40" @click="dice">Go Dice</button>
+      <div class="card_content">
+        <p class="fz-h3">{{ placeName }}</p>
+        <!--        <p>placeId : {{ placeId }}</p>-->
 
-      placeId : {{ placeId }} <br>
-      name : {{ placeName }} <br>
-      rating : {{ placeRating }} <br>
-      userRatingsTotal : {{ placeUserRatingsTotal }} <br>
-      vicinity : {{ placeVicinity }} <br>
-      <button @click="getPlaceDetail">detail</button>
+        <div class="flex-row">
+          <i class="i-rating"></i>
+          <div class="flex-col">
+            <p class="fz-h4">Rating</p>
+            <p class="fz-h5">{{ placeRating }}</p>
+          </div>
+        </div>
 
-      <br>
-      <span v-if="isDetailOpen">
-          address : {{ detailAddress }} <br>
-          google map url : {{ detailUrl }} <br>
-          website : {{ detailWebsite }} <br>
-          phone number : {{ detailPhoneNumber }} <br>
-          reviews : <br>
-          <span v-for="review in detailReviews">
-            authorName : {{ review.author_name }} <br>
-            rating : {{ review.rating }} <br>
-            time : {{ review.relative_time_description }} <br>
-            text : {{ review.text }} <br>
-            <hr>
-          </span>
-        </span>
+        <div class="flex-row">
+          <i class="i-total"></i>
+          <div class="flex-col">
+            <p class="fz-h4">UserRatingsTotal</p>
+            <p class="fz-h5">{{ placeUserRatingsTotal }}</p>
+          </div>
+        </div>
+
+        <div class="flex-row">
+          <i class="i-vicinity"></i>
+          <div class="flex-col">
+            <p class="fz-h4">Address</p>
+            <p class="fz-h5">{{ detailAddress }}</p>
+          </div>
+        </div>
+        <button class="btn-sec" @click="getPlaceDetail">Detail</button>
+
+        <!--        <div v-if="isDetailOpen">-->
+        <div>
+          <!--        <div class="pop_overlay">-->
+          <!--          <div class="pop_content">-->
+
+          <!--          <div class="flex-row">-->
+          <!--            <i class="i-user"></i>-->
+          <!--            <div class="flex-col">-->
+          <!--              <p class="fz-h4">address</p>-->
+          <!--              <p class="fz-h5">{{ detailAddress }}</p>-->
+          <!--            </div>-->
+          <!--          </div>-->
+
+          <div class="flex-row">
+            <i class="i-phone"></i>
+            <div class="flex-col">
+              <p class="fz-h4">phone number</p>
+              <p class="fz-h5">{{ detailPhoneNumber }}</p>
+            </div>
+          </div>
+
+          <div class="flex-row">
+            <i class="i-map"></i>
+            <div class="flex-col">
+              <p class="fz-h4">google map</p>
+              <p class="fz-h5">{{ detailUrl }}</p>
+            </div>
+          </div>
+
+          <div class="flex-row">
+            <i class="i-website"></i>
+            <div class="flex-col">
+              <p class="fz-h4">website</p>
+              <p class="fz-h5">{{ detailWebsite }}</p>
+            </div>
+          </div>
+
+          <div class="flex-col mt-40">
+                  <span v-for="review in detailReviews" class="review_content">
+                    <div class="flex-row">
+                      <i class="i-user"></i>
+                      <p>{{ review.author_name }}</p>
+                    </div>
+
+                     <div class="flex-row-sb">
+                       <span class="flex-row">
+                         <i class="i-rating"></i>
+                          <p>{{ review.rating }}</p>
+                       </span>
+                       <span class="flex-row">
+                          <p>{{ review.relative_time_description }}</p>
+                       </span>
+                    </div>
+                    <p class="fz-h5">{{ review.text }}</p>
+                  </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
