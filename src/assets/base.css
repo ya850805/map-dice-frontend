@@ -7,7 +7,9 @@
 
     /*白色*/
     --white: #fff;
+    --white30: #fffff30;
     --sec-gray: #C6CACE;
+    --thir-gray: #F4F5F6;
     /*--white-70: #ffffff70;*/
 
     /*灰色*/
@@ -21,9 +23,10 @@
     /* font-variables */
     --font-size-base: 16px;
     --font-h1: 96px;
-    --font-h2: 32px;
-    --font-h3: 20px;
-    --font-h4: 14px;
+    --font-h2: 48px;
+    --font-h3: 32px;
+    --font-h4: 20px;
+    --font-h5: 14px;
 
     /*font-weight*/
     --fw-bold: 700;
@@ -35,6 +38,8 @@ h1, .fz-h1 {
     line-height: 112px;
     letter-spacing: 10px;
     font-family: "Playfair Display";
+    font-weight: var(--fw-bold);
+    text-align: center;
 }
 
 h2, .fz-h2 {
@@ -42,18 +47,27 @@ h2, .fz-h2 {
     font-family: "Itim";
     text-align: center;
     color: var(--white);
-    /*line-height: 48px*/
+    font-weight: var(--fw-bold);
+    line-height: 58px;
 }
 
 h3, .fz-h3 {
     font-size: var(--font-h3);
     font-weight: var(--fw-bold);
-    line-height: 32px
+    line-height: 44px;
+    font-weight: var(--fw-bold);
 }
 
 h4, .fz-h4 {
     font-size: var(--font-h4);
-    line-height: 24px
+    line-height: 32px;
+}
+
+h5, .fz-h5 {
+    font-size: var(--font-h5);
+    line-height: 24px;
+    /*font-weight: var(--fw-bold);*/
+    color: var(--txt-placeholder);
 }
 
 .flex-row {
@@ -64,6 +78,12 @@ h4, .fz-h4 {
 .flex-col {
     display: flex;
     flex-direction: column;
+}
+
+.flex-row-sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .flex-wrap {

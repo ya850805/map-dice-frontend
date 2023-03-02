@@ -14,6 +14,11 @@ body {
     overflow-y: auto;
 }
 
+p {
+    margin-block-start: 0;
+    margin-block-end: 8px;
+}
+
 #app {
     display: flex;
     justify-content: center;
@@ -26,6 +31,8 @@ body {
     bottom: 0;
     max-width: 100%;
     min-width: auto;
+    height: auto;
+    min-height: 100vh;
     padding: 24px;
     background: radial-gradient(50% 50% at 50% 50%, #AAB3FE 0%, #9EAAFF 71.18%, #8D9DFF 100%);
 
@@ -61,4 +68,46 @@ body {
 
     background: #FFFFFF;
     border-radius: 16px;
+}
+
+.review_content {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid var(--sec-gray);*/
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0px 0px 8px 0px var(--sec-gray);
+}
+
+.pop_overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.2);
+    overflow-y: hidden;
+    z-index: 3;
+    /* sec-gray */
+}
+
+.pop_content {
+    display: flex;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    flex-direction: column;
+    width: 100%;
+    max-width: 448px;
+    min-width: auto;
+    background-color: var(--white);
+    padding: 16px;
+    border-radius: 16px;
+    z-index: 4;
 }
