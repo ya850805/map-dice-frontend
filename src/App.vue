@@ -11,7 +11,9 @@
     </div>
     <div class="flex-col w-100">
       <p>password</p>
-      <input type="password" v-model="password"/>
+      <input v-if="showPassword" type="text" v-model="password"/>
+      <input v-else type="password" v-model="password"/>
+      <button @click="showPassword=!showPassword">show pwd</button>
     </div>
 
     <div class="flex-col w-100 mt-40">
@@ -136,6 +138,7 @@ import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConst
 let loginUser = ref("")
 let username = ref("")
 let password = ref("")
+let showPassword = ref(false)
 
 let type = ref("")
 let placeId = ref("")
