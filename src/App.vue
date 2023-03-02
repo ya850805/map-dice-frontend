@@ -29,7 +29,6 @@
     <hr>
 
     <div class="w-100" v-if="loginUser != ''">
-      <!--    <div class="w-100">-->
       <h2 class="txt_white">Choose at random</h2>
       <div class="flex-col w-100">
         <p>Place type:</p>
@@ -66,21 +65,17 @@
             <p class="fz-h5">{{ detailAddress }}</p>
           </div>
         </div>
+
+        <!--        <div class="flex-row">-->
+        <!--          <i class="i-vicinity"></i>-->
+        <!--          <div class="flex-col">-->
+        <!--            <p class="fz-h4">Vicinity</p>-->
+        <!--            <p class="fz-h5">{{ placeVicinity }}</p>-->
+        <!--          </div>-->
+        <!--        </div>-->
+
         <button class="btn-sec" @click="getPlaceDetail">Detail</button>
-
-        <!--        <div v-if="isDetailOpen">-->
-        <div>
-          <!--        <div class="pop_overlay">-->
-          <!--          <div class="pop_content">-->
-
-          <!--          <div class="flex-row">-->
-          <!--            <i class="i-user"></i>-->
-          <!--            <div class="flex-col">-->
-          <!--              <p class="fz-h4">address</p>-->
-          <!--              <p class="fz-h5">{{ detailAddress }}</p>-->
-          <!--            </div>-->
-          <!--          </div>-->
-
+        <div v-if="isDetailOpen">
           <div class="flex-row">
             <i class="i-phone"></i>
             <div class="flex-col">
@@ -105,7 +100,7 @@
             </div>
           </div>
 
-          <div class="flex-col mt-40">
+          <div class="flex-col">
                   <span v-for="review in detailReviews" class="review_content">
                     <div class="flex-row">
                       <i class="i-user"></i>
