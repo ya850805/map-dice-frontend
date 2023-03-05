@@ -5,6 +5,10 @@
   <div class="function-content">
     <div class="img-open"></div>
     <!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
+    {{ $t('_lang') }}
+    <select v-model="$i18n.locale">
+      <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
+    </select>
     <div class="flex-col w-100">
       <p>username:</p>
       <input type="text" v-model="username"/>
@@ -17,8 +21,8 @@
     </div>
 
     <div class="flex-col w-100 mt-40">
-      <button @click="register()">Register</button>
-      <button class="btn-sec" @click="login" v-if="loginUser == ''">login</button>
+      <button @click="register()">{{ $t('_register') }}</button>
+      <button class="btn-sec" @click="login" v-if="loginUser == ''">{{ $t('_login') }}</button>
 
       <div class="flex-row-sb mt-40" v-if="loginUser != ''">
         <p>Hi ~ {{ loginUser }}</p>
@@ -126,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 
