@@ -1,5 +1,17 @@
 {
   "_lang": "語言",
   "_login": "登入",
-  "_register": "註冊"
+  "_register": "註冊",
+  "_username": "用戶名",
+  "_password": "密碼",
+  "_placeType": "地點類型",
+  "_restaurant": "餐廳",
+  "_dice": "骰",
+  "_rating": "評分",
+  "_userRatingsTotal": "評分總數",
+  "_address": "地址",
+  "_detail": "詳情",
+  "_phoneNumber": "電話",
+  "_googleMapUrl": "Google地圖連結",
+  "_website": "網站"
 }

@@ -10,11 +10,11 @@
       <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
     </select>
     <div class="flex-col w-100">
-      <p>username:</p>
+      <p>{{ $t('_username') }}</p>
       <input type="text" v-model="username"/>
     </div>
     <div class="flex-col w-100">
-      <p>password</p>
+      <p>{{ $t('password') }}</p>
       <input v-if="showPassword" type="text" v-model="password"/>
       <input v-else type="password" v-model="password"/>
       <button @click="showPassword=!showPassword">show pwd</button>
@@ -35,13 +35,13 @@
     <div class="w-100" v-if="loginUser != ''">
       <h2 class="txt_white">Choose at random</h2>
       <div class="flex-col w-100">
-        <p>Place type:</p>
+        <p>{{ $t('_placeType') }}</p>
         <select v-model="type">
-          <option value="restaurant">restaurant</option>
+          <option value="restaurant">{{ $t('_restaurant') }}</option>
         </select>
       </div>
 
-      <button class="mt-40" @click="dice">Go Dice</button>
+      <button class="mt-40" @click="dice">{{ $t('_dice') }}</button>
       <div class="card_content">
         <p class="fz-h3">{{ placeName }}</p>
         <!--        <p>placeId : {{ placeId }}</p>-->
@@ -49,7 +49,7 @@
         <div class="flex-row">
           <i class="i-rating"></i>
           <div class="flex-col">
-            <p class="fz-h4">Rating</p>
+            <p class="fz-h4">{{ $t('_rating') }}</p>
             <p class="fz-h5">{{ placeRating }}</p>
           </div>
         </div>
@@ -57,16 +57,8 @@
         <div class="flex-row">
           <i class="i-total"></i>
           <div class="flex-col">
-            <p class="fz-h4">UserRatingsTotal</p>
+            <p class="fz-h4">{{ $t('_userRatingsTotal') }}</p>
             <p class="fz-h5">{{ placeUserRatingsTotal }}</p>
-          </div>
-        </div>
-
-        <div class="flex-row">
-          <i class="i-vicinity"></i>
-          <div class="flex-col">
-            <p class="fz-h4">Address</p>
-            <p class="fz-h5">{{ detailAddress }}</p>
           </div>
         </div>
 
@@ -78,12 +70,20 @@
         <!--          </div>-->
         <!--        </div>-->
 
-        <button class="btn-sec" @click="getPlaceDetail">Detail</button>
+        <button class="btn-sec" @click="getPlaceDetail">{{ $t('_detail') }}</button>
         <div v-if="isDetailOpen">
+          <div class="flex-row">
+            <i class="i-vicinity"></i>
+            <div class="flex-col">
+              <p class="fz-h4">{{ $t('_address') }}</p>
+              <p class="fz-h5">{{ detailAddress }}</p>
+            </div>
+          </div>
+
           <div class="flex-row">
             <i class="i-phone"></i>
             <div class="flex-col">
-              <p class="fz-h4">phone number</p>
+              <p class="fz-h4">{{ $t('_phoneNumber') }}</p>
               <p class="fz-h5">{{ detailPhoneNumber }}</p>
             </div>
           </div>
@@ -91,7 +91,7 @@
           <div class="flex-row">
             <i class="i-map"></i>
             <div class="flex-col">
-              <p class="fz-h4">google map</p>
+              <p class="fz-h4">{{ $t('_googleMapUrl') }}</p>
               <p class="fz-h5">{{ detailUrl }}</p>
             </div>
           </div>
@@ -99,7 +99,7 @@
           <div class="flex-row">
             <i class="i-website"></i>
             <div class="flex-col">
-              <p class="fz-h4">website</p>
+              <p class="fz-h4">{{ $t('_website') }}</p>
               <p class="fz-h5">{{ detailWebsite }}</p>
             </div>
           </div>

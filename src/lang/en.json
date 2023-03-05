@@ -1,5 +1,17 @@
 {
   "_lang": "language",
   "_login": "login",
-  "_register": "register"
+  "_register": "register",
+  "_username": "username",
+  "_password": "password",
+  "_placeType": "Place type",
+  "_restaurant": "restaurant",
+  "_dice": "Dice",
+  "_rating": "Rating",
+  "_userRatingsTotal": "User ratings total",
+  "_address": "Address",
+  "_detail": "Detail",
+  "_phoneNumber": "Phone number",
+  "_googleMapUrl": "Google maps link",
+  "_website": "website"
 }
