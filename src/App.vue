@@ -14,7 +14,7 @@
       <input type="text" v-model="username"/>
     </div>
     <div class="flex-col w-100">
-      <p>{{ $t('password') }}</p>
+      <p>{{ $t('_password') }}</p>
       <input v-if="showPassword" type="text" v-model="password"/>
       <input v-else type="password" v-model="password"/>
       <button @click="showPassword=!showPassword">show pwd</button>
