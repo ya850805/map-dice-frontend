@@ -2,6 +2,7 @@
   "_lang": "language",
   "_login": "login",
   "_register": "register",
+  "_email": "email",
   "_username": "username",
   "_password": "password",
   "_placeType": "Place type",
