@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="flex-col w-100 mt-40">
-    <button class="btn-sec" @click="login">{{ $t('_login') }}</button>
+    <button @click="login">{{ $t('_login') }}</button>
   </div>
 </template>
 
