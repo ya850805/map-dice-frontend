@@ -1,6 +1,8 @@
 {
   "_lang": "語言",
   "_login": "登入",
+  "_forgotPassword": "忘記密碼",
+  "_sendEmail": "發送郵件",
   "_register": "註冊",
   "_email": "電子郵件",
   "_username": "用戶名",

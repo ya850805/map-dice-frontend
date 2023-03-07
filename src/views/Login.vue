@@ -13,6 +13,13 @@
   </div>
   <div class="flex-col w-100 mt-40">
     <button @click="login">{{ $t('_login') }}</button>
+    <button @click="showEmail=true">{{ $t('_forgotPassword') }}</button>
+  </div>
+
+  <div v-if="showEmail">
+    {{ $t('_email') }}
+    <input type="text" v-model="email" />
+    <button @click="sendForgotPasswordEmail">{{ $t('_sendEmail') }}</button>
   </div>
 </template>
 
@@ -25,6 +32,9 @@ let username = ref("")
 let password = ref("")
 let showPassword = ref(false)
 const emit = defineEmits(['updateLoginUser'])
+
+let showEmail = ref(false)
+let email = ref("")
 
 function login() {
   if (username.value == "") {
@@ -57,6 +67,21 @@ function login() {
           username.value = ""
           password.value = ""
         }
+      })
+}
+
+function sendForgotPasswordEmail() {
+  axios.post(`${BACKEND_URL}/users/forgotPwd/${email.value}`)
+      .then(res => {
+        if(res.data.code != 200) {
+          alert(res.data.data)
+        } else {
+          alert('reset password mail has sent, please check')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        alert('send email occurs error')
       })
 }
 </script>

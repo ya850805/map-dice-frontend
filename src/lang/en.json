@@ -1,6 +1,8 @@
 {
   "_lang": "language",
   "_login": "login",
+  "_forgotPassword": "forgot password",
+  "_sendEmail": "send email",
   "_register": "register",
   "_email": "email",
   "_username": "username",
