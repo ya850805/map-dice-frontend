@@ -20,11 +20,11 @@
       </div>
     </div>
 
-    <div class="tab-content flex-row" v-else>
+    <div v-else class="tab-content flex-row" >
       <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
       <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
+      <RouterView @updateLoginUser="updateLoginUser"/>
     </div>
-    <RouterView @updateLoginUser="updateLoginUser"/>
 
     <div class="w-100" v-if="loginUser != ''">
       <h2 class="txt_white">Choose at random</h2>
