@@ -15,6 +15,14 @@
       <i class="i-password" @click="showPassword=!showPassword" ></i>
     </div>
   </div>
+  <div class="flex-col w-100">
+    <p>{{ $t('_confirmPassword') }}</p>
+    <div class="flex-row-sb pos-relative">
+      <input class="w-100" v-if="showConfirmPassword" type="text" v-model="confirmPassword"/>
+      <input class="w-100" v-else type="password" v-model="confirmPassword"/>
+      <i class="i-password" @click="showConfirmPassword=!showConfirmPassword" ></i>
+    </div>
+  </div>
   <div class="flex-col w-100 mt-40">
     <button @click="register()">{{ $t('_register') }}</button>
   </div>
@@ -28,7 +36,9 @@ import {BACKEND_URL} from "@/constant/MapDiceConstant";
 let email = ref("")
 let username = ref("")
 let password = ref("")
+let confirmPassword = ref("")
 let showPassword = ref(false)
+let showConfirmPassword = ref(false)
 
 function register() {
   if(email.value == "") {
@@ -43,6 +53,16 @@ function register() {
 
   if (password.value == "") {
     alert("password is required")
+    return
+  }
+
+  if (confirmPassword.value == "") {
+    alert("password is required")
+    return
+  }
+
+  if(password.value != confirmPassword.value) {
+    alert("password and confirm password are not match")
     return
   }
 
