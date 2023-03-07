@@ -1,3 +1,37 @@
+.i18n-content {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+}
+
+.tab-content {
+    width: 100%;
+    height: 48px;
+    /*border: 1px solid var(--thir-gray);*/
+    background-color: var(--thir-gray);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.tab-content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin: 4px;
+    color: var(--primary);
+    text-align: center;
+    text-decoration: none;
+}
+
+.red.router-link-exact-active {
+    background-color: var(--primary);
+    border-radius: 8px;
+    color: var(--white);
+}
+
 /* @元件 - input select --------------------------------------------------------------------------------------------- */
 input, select {
     display: flex;
@@ -15,6 +49,19 @@ input, select {
     border: 1px solid var(--sec-gray);
     border-radius: 10px;
     font-family: "Manrope";
+}
+
+.i18n-content select {
+    width: 42px;
+    height: 60px;
+    min-width: 36px;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-radius: 8px;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: right;
+    padding: 0 4px 0 0;
 }
 
 /* @元件-按鈕 primary---------------------------------------------------------------------------------------------- */
@@ -104,6 +151,30 @@ button.btn-sec {
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
+}
+
+.i-language {
+    width: 36px;
+    height: 36px;
+    background-image: url("images/i-Language.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.i-password {
+    width: 36px;
+    height: 36px;
+    background-image: url("images/i-eye-s.svg");
+    background-position-y: 12px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+
+input[type="password"] + i {
+    background-image: url("images/i-eye.svg");
 }
 
 /* @圖示-image ---------------------------------------------------------------------------------------------- */

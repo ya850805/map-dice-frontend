@@ -5,9 +5,11 @@
   </div>
   <div class="flex-col w-100">
     <p>{{ $t('_password') }}</p>
-    <input v-if="showPassword" type="text" v-model="password"/>
-    <input v-else type="password" v-model="password"/>
-    <button @click="showPassword=!showPassword">show pwd</button>
+    <div class="flex-row-sb pos-relative">
+      <input class="w-100" v-if="showPassword" type="text" v-model="password"/>
+      <input class="w-100" v-else type="password" v-model="password"/>
+      <i class="i-password" @click="showPassword=!showPassword"></i>
+    </div>
   </div>
   <div class="flex-col w-100 mt-40">
     <button class="btn-sec" @click="login">{{ $t('_login') }}</button>

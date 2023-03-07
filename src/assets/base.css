@@ -1,5 +1,5 @@
 /* color palette from <https://github.com/vuejs/theme> */
-:root {
+html:root {
     /* color-variables */
     /*主要色 */
     --primary: #5E28AD;
@@ -96,6 +96,10 @@ h5, .fz-h5 {
 
 .mt-40 {
     margin-top: 40px;
+}
+
+.pos-relative {
+    position: relative;
 }
 
 /*.txt_white {*/
