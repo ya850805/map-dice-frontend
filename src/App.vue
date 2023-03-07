@@ -5,10 +5,13 @@
   <div class="function-content">
     <div class="img-open"></div>
     <!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
-    {{ $t('_lang') }}
-    <select v-model="$i18n.locale">
-      <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
-    </select>
+    <div class="i18n-content">
+      <i class="i-language"></i>
+      <!--      <p>{{ $t('_lang') }}</p>-->
+      <select class="w-100" v-model="$i18n.locale">
+        <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
+      </select>
+    </div>
 
     <div v-if="loginUser != ''">
       <div class="flex-row-sb mt-40" v-if="loginUser != ''">
@@ -16,13 +19,12 @@
         <i class="i-logout" @click="logout"></i>
       </div>
     </div>
-    <div v-else>
-      <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
-      <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
-      <RouterView @updateLoginUser="updateLoginUser" />
-    </div>
 
-    <hr>
+    <div class="tab-content flex-row" v-else>
+      <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
+      <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
+    </div>
+    <RouterView @updateLoginUser="updateLoginUser"/>
 
     <div class="w-100" v-if="loginUser != ''">
       <h2 class="txt_white">Choose at random</h2>
@@ -250,4 +252,5 @@ function logout() {
 .red {
   color: red;
 }
+
 </style>
