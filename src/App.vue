@@ -4,7 +4,7 @@
   <img class="img-bg-bottom" src="./assets/images/bg-bottom.png"/>
   <div class="function-content">
     <div class="img-open"></div>
-    <div class="i18n-content">
+    <div class="i18n-block">
       <i class="i-language"></i>
       <!--      <p>{{ $t('_lang') }}</p>-->
       <select class="w-100" v-model="$i18n.locale">
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div v-else class="tab-content flex-row">
+    <div v-else class="tab-block flex-row">
       <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
       <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
     </div>
