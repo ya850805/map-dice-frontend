@@ -1,10 +1,9 @@
 <template>
-  <div class="img-bg-top-L"></div>
-  <div class="img-bg-top-R"></div>
-  <div class="img-bg-bottom"></div>
+  <img class="img-bg-top-L" src="./assets/images/bg-top-L.png"/>
+  <img class="img-bg-top-R" src="./assets/images/bg-top-R.png"/>
+  <img class="img-bg-bottom" src="./assets/images/bg-bottom.png"/>
   <div class="function-content">
     <div class="img-open"></div>
-    <!--    <img src="./assets/images/img-open.png" alt="" height="222" width="222"/>-->
     <div class="i18n-content">
       <i class="i-language"></i>
       <!--      <p>{{ $t('_lang') }}</p>-->
@@ -20,11 +19,11 @@
       </div>
     </div>
 
-    <div v-else class="tab-content flex-row" >
+    <div v-else class="tab-content flex-row">
       <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
       <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
-      <RouterView @updateLoginUser="updateLoginUser"/>
     </div>
+    <RouterView @updateLoginUser="updateLoginUser"/>
 
     <div class="w-100" v-if="loginUser != ''">
       <h2 class="txt_white">Choose at random</h2>
@@ -99,23 +98,23 @@
           </div>
 
           <div class="flex-col">
-                  <span v-for="review in detailReviews" class="review_content">
-                    <div class="flex-row">
-                      <i class="i-user"></i>
-                      <p>{{ review.author_name }}</p>
-                    </div>
+            <span v-for="review in detailReviews" class="review_content">
+              <div class="flex-row">
+                <i class="i-user"></i>
+                <p>{{ review.author_name }}</p>
+              </div>
 
-                     <div class="flex-row-sb">
-                       <span class="flex-row">
-                         <i class="i-rating"></i>
-                          <p>{{ review.rating }}</p>
-                       </span>
-                       <span class="flex-row">
-                          <p>{{ review.relative_time_description }}</p>
-                       </span>
-                    </div>
-                    <p class="fz-h5">{{ review.text }}</p>
-                  </span>
+              <div class="flex-row-sb">
+                <span class="flex-row">
+                  <i class="i-rating"></i>
+                  <p>{{ review.rating }}</p>
+                </span>
+                <span class="flex-row">
+                  <p>{{ review.relative_time_description }}</p>
+                </span>
+              </div>
+              <p class="fz-h5">{{ review.text }}</p>
+            </span>
           </div>
         </div>
       </div>

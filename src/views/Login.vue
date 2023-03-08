@@ -10,17 +10,24 @@
       <input class="w-100" v-else type="password" v-model="password"/>
       <i class="i-password" @click="showPassword=!showPassword"></i>
     </div>
+
+    <div class="flex-row-e">
+      <a @click="showEmail=true">{{ $t('_forgotPassword') }}</a>
+    </div>
   </div>
   <div class="flex-col w-100 mt-40">
     <button @click="login">{{ $t('_login') }}</button>
-    <button @click="showEmail=true">{{ $t('_forgotPassword') }}</button>
   </div>
 
-  <div v-if="showEmail">
-    {{ $t('_email') }}
-    <input type="text" v-model="email" />
-    <button @click="sendForgotPasswordEmail">{{ $t('_sendEmail') }}</button>
+  <div class="pop_content" v-if="showEmail">
+    <i class="i-cancel" @click="showEmail=false"></i>
+    <div class="flex-col">
+      <p>{{ $t('_email') }}</p>
+      <input type="text" v-model="email"/>
+    </div>
+    <button class="mt-40" @click="sendForgotPasswordEmail">{{ $t('_sendEmail') }}</button>
   </div>
+  <div class="pop_overlay" v-if="showEmail" @click="showEmail=false"></div>
 </template>
 
 <script setup>
@@ -73,7 +80,7 @@ function login() {
 function sendForgotPasswordEmail() {
   axios.post(`${BACKEND_URL}/users/forgotPwd/${email.value}`)
       .then(res => {
-        if(res.data.code != 200) {
+        if (res.data.code != 200) {
           alert(res.data.data)
         } else {
           alert('reset password mail has sent, please check')

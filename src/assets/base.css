@@ -86,6 +86,12 @@ h5, .fz-h5 {
     justify-content: space-between;
 }
 
+.flex-row-e {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 .flex-wrap {
     flex-wrap: wrap;
 }
@@ -102,9 +108,9 @@ h5, .fz-h5 {
     position: relative;
 }
 
-/*.txt_white {*/
-/*    color: var(--white);*/
-/*}*/
+.txt_bold {
+    color: var(--white);
+}
 
 
 /*@media (prefers-color-scheme: dark) {*/

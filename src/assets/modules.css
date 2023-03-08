@@ -8,7 +8,6 @@
 .tab-content {
     width: 100%;
     height: 48px;
-    /*border: 1px solid var(--thir-gray);*/
     background-color: var(--thir-gray);
     border-radius: 10px;
     margin-bottom: 40px;
@@ -21,7 +20,6 @@
 
     width: 100%;
     margin: 4px;
-    color: var(--primary);
     text-align: center;
     text-decoration: none;
 }
@@ -31,6 +29,7 @@
     border-radius: 8px;
     color: var(--white);
 }
+
 
 /* @元件 - input select --------------------------------------------------------------------------------------------- */
 input, select {
@@ -62,6 +61,7 @@ input, select {
     border-color: transparent;
     text-align: right;
     padding: 0 4px 0 0;
+    font-weight: var(--fw-bold);
 }
 
 /* @元件-按鈕 primary---------------------------------------------------------------------------------------------- */
@@ -95,17 +95,21 @@ button.btn-sec {
 }
 
 /* @圖示-icon ---------------------------------------------------------------------------------------------- */
-.card_content i {
+i {
     width: 36px;
     height: 36px;
     min-width: 36px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    cursor: pointer;
+}
+
+.card_content i {
     margin-right: 16px;
     margin-bottom: 32px;
     border-radius: 8px;
     background-color: var(--thir-gray);
-
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .i-rating {
@@ -135,9 +139,6 @@ button.btn-sec {
 .review_content i {
     width: 22px;
     height: 22px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: transparent;
 }
 
 .i-user {
@@ -145,87 +146,65 @@ button.btn-sec {
 }
 
 .i-logout {
-    width: 36px;
-    height: 36px;
     background-image: url("images/i-Logout.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
 }
 
 .i-language {
-    width: 36px;
-    height: 36px;
     background-image: url("images/i-Language.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
 }
 
 .i-password {
-    width: 36px;
-    height: 36px;
     background-image: url("images/i-eye-s.svg");
-    background-position-y: 12px;
-    background-repeat: no-repeat;
-    cursor: pointer;
     position: absolute;
-    right: 0;
+    top: 10px;
+    right: 4px;
 }
 
 input[type="password"] + i {
     background-image: url("images/i-eye.svg");
 }
 
+.i-cancel {
+    background-image: url("images/i-X.svg");
+    position: absolute;
+    top: 10px;
+    right: 2px;
+}
+
+
 /* @圖示-image ---------------------------------------------------------------------------------------------- */
+img {
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+}
+
 .img-open {
     background-image: url("images/img-open.png");
     width: 222px;
     height: 222px;
-    z-index: 0;
-    pointer-events: none;
 }
 
 .img-bg-top-L {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("images/bg-top-L.png");
-
-    width: 100%;
-    height: 170px;
-    background-size: contain;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    z-index: 0;
-    pointer-events: none;
+    max-width: 648px;
+    background-size: cover;
 }
 
 .img-bg-top-R {
     position: absolute;
     top: 0;
     right: 0;
-    background-image: url("images/bg-top-R.png");
-
-    width: 122px;
-    height: 123px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    z-index: 0;
-    pointer-events: none;
+    max-width: 122px;
 }
 
 .img-bg-bottom {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-image: url("images/bg-bottom.png");
-
-    width: 100%;
-    height: 480px;
+    max-width: 100%;
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    z-index: 0;
-    pointer-events: none;
 }

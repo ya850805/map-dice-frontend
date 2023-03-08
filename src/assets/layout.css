@@ -19,6 +19,13 @@ p {
     margin-block-end: 8px;
 }
 
+a {
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
 #app {
     display: flex;
     justify-content: flex-start;
@@ -81,7 +88,6 @@ p {
 }
 
 .pop_overlay {
-    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -100,14 +106,13 @@ p {
 
 .pop_content {
     display: flex;
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    position: absolute;
     flex-direction: column;
-    width: 100%;
+    width: calc(100vw - 72px);
     max-width: 448px;
     min-width: auto;
     background-color: var(--white);
-    padding: 16px;
+    padding: 32px 16px 16px 16px;
     border-radius: 16px;
     z-index: 4;
 }
