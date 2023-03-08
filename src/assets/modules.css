@@ -148,6 +148,7 @@ i {
 
 .i-logout {
     background-image: url("images/i-Logout.svg");
+    margin-left: 16px;
 }
 
 .i-language {
