@@ -4,26 +4,25 @@
   <img class="img-bg-bottom" src="./assets/images/bg-bottom.png"/>
   <div class="function-content">
     <div class="img-open"></div>
-    <div class="i18n-content">
+    <div class="i18n-block">
       <i class="i-language"></i>
       <!--      <p>{{ $t('_lang') }}</p>-->
       <select class="w-100" v-model="$i18n.locale">
         <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
       </select>
+      <i class="i-logout" @click="logout" v-if="loginUser != ''"></i>
     </div>
 
-    <div v-if="loginUser != ''">
-      <div class="flex-row-sb mt-40" v-if="loginUser != ''">
-        <p>Hi ~ {{ loginUser }}</p>
-        <i class="i-logout" @click="logout"></i>
+    <div class="flex-row-sb" v-if="loginUser != ''">
+      <h4>Hi ~ {{ loginUser }}</h4>
+    </div>
+    <div class="w-100" v-else>
+      <div class="flex-row tab-block">
+        <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
+        <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
       </div>
+      <RouterView @updateLoginUser="updateLoginUser"/>
     </div>
-
-    <div v-else class="tab-content flex-row">
-      <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
-      <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
-    </div>
-    <RouterView @updateLoginUser="updateLoginUser"/>
 
     <div class="w-100" v-if="loginUser != ''">
       <h2 class="txt_white">Choose at random</h2>
@@ -128,7 +127,6 @@ import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 
 let loginUser = ref("")
-
 let type = ref("")
 let placeId = ref("")
 let placeName = ref("")

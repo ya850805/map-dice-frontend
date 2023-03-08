@@ -49,6 +49,7 @@ a {
     text-align: left;
 }
 
+/* @容器區塊 - content --------------------------------------------------------------------------------------------- */
 .function-content {
     display: flex;
     justify-content: center;
@@ -68,23 +69,20 @@ a {
     padding: 40px 40px 20px 40px;
     gap: 16px;
 
-    /*position: absolute;*/
     width: auto;
     height: auto;
-    /* Base/White */
 
-    background: #FFFFFF;
+    background-color: var(--white);
     border-radius: 16px;
 }
 
 .review_content {
     display: flex;
     flex-direction: column;
-    /*border: 1px solid var(--sec-gray);*/
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 24px;
-    box-shadow: 0px 0px 8px 0px var(--sec-gray);
+    box-shadow: 0 0 8px 0 var(--sec-gray);
 }
 
 .pop_overlay {
@@ -101,7 +99,6 @@ a {
     background: rgba(0, 0, 0, 0.2);
     overflow-y: hidden;
     z-index: 3;
-    /* sec-gray */
 }
 
 .pop_content {
