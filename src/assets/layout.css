@@ -26,6 +26,10 @@ a {
     letter-spacing: 1px;
 }
 
+a:hover {
+    color: var(--primary-30);
+}
+
 #app {
     display: flex;
     justify-content: flex-start;
@@ -103,8 +107,9 @@ a {
 
 .pop_content {
     display: flex;
-    position: absolute;
     flex-direction: column;
+    position: absolute;
+    top: 30%;
     width: calc(100vw - 72px);
     max-width: 448px;
     min-width: auto;

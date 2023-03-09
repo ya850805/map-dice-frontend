@@ -14,7 +14,7 @@
     margin-bottom: 40px;
 }
 
-.tab-block a {
+.tab-block a, .tab-block a:active {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +29,12 @@
     background-color: var(--primary);
     border-radius: 8px;
     color: var(--white);
+}
+
+.tab-block a:hover {
+    background-color: var(--primary-30);
+    color: var(--primary);
+    border-radius: 8px;
 }
 
 
@@ -51,6 +57,12 @@ input, select {
     font-family: "Manrope";
 }
 
+input:focus, select:focus, input:-webkit-autofill {
+    outline: solid var(--primary);
+    background-color: var(--white) !important;
+}
+
+
 .i18n-block select {
     width: 42px;
     height: 60px;
@@ -63,6 +75,20 @@ input, select {
     text-align: right;
     padding: 0 4px 0 0;
     font-weight: var(--fw-bold);
+}
+
+.i18n-block select:focus {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    outline: transparent !important;
+}
+
+.i18n-block:hover select {
+    color: var(--primary);
+}
+
+.i18n-block:hover .i-language {
+    background-image: url("images/i-Language-s.svg");
 }
 
 /* @元件-按鈕 primary---------------------------------------------------------------------------------------------- */
@@ -78,7 +104,6 @@ button {
     max-height: 40px;
     margin-bottom: 16px;
 
-    /* primary */
     background: var(--primary);
     color: var(--white);
     border: 1px solid var(--primary);
@@ -93,6 +118,12 @@ button.btn-sec {
     background: var(--white);
     color: var(--txt-default);
     border: 1px solid var(--sec-gray);
+}
+
+button:hover {
+    background-color: var(--primary-30);
+    color: var(--primary);
+    border-radius: 8px;
 }
 
 /* @圖示-icon ---------------------------------------------------------------------------------------------- */
