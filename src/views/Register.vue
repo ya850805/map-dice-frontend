@@ -12,7 +12,7 @@
     <div class="flex-row-sb pos-relative">
       <input class="w-100" v-if="showPassword" type="text" v-model="password"/>
       <input class="w-100" v-else type="password" v-model="password"/>
-      <i class="i-password" @click="showPassword=!showPassword" ></i>
+      <i class="i-password" @click="showPassword=!showPassword"></i>
     </div>
   </div>
   <div class="flex-col w-100">
@@ -20,18 +20,29 @@
     <div class="flex-row-sb pos-relative">
       <input class="w-100" v-if="showConfirmPassword" type="text" v-model="confirmPassword"/>
       <input class="w-100" v-else type="password" v-model="confirmPassword"/>
-      <i class="i-password" @click="showConfirmPassword=!showConfirmPassword" ></i>
+      <i class="i-password" @click="showConfirmPassword=!showConfirmPassword"></i>
     </div>
   </div>
   <div class="flex-col w-100 mt-40">
     <button @click="register()">{{ $t('_register') }}</button>
   </div>
+
+  <AlertTheme v-if="isAlertShow" @closeAlert="isAlertShow = false" :alertMessage="alertMessage"
+              :alert-btn-message="alertBtnMessage">
+    <template></template>
+  </AlertTheme>
 </template>
 
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL} from "@/constant/MapDiceConstant";
+import AlertTheme from "@/views/AlertTheme.vue";
+
+//is alert show
+let isAlertShow = ref(false)
+let alertMessage = ref("")
+let alertBtnMessage = ref("")
 
 let email = ref("")
 let username = ref("")
@@ -41,28 +52,38 @@ let showPassword = ref(false)
 let showConfirmPassword = ref(false)
 
 function register() {
-  if(email.value == "") {
-    alert("email is required")
+  if (email.value == "") {
+    alertMessage.value = ("mail is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
   if (username.value == "") {
-    alert("username is required")
+    alertMessage.value = ("username is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
   if (password.value == "") {
-    alert("password is required")
+    alertMessage.value = ("password is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
   if (confirmPassword.value == "") {
-    alert("password is required")
+    alertMessage.value = ("password is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
-  if(password.value != confirmPassword.value) {
-    alert("password and confirm password are not match")
+  if (password.value != confirmPassword.value) {
+    alertMessage.value = ("password and confirm password are not match")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
@@ -75,7 +96,9 @@ function register() {
   axios.post(`${BACKEND_URL}/users/create`, registerUser)
       .then(res => {
         if (res.data.code == 200 && res.data.data == 1) {
-          alert("successfully create user")
+          alertMessage.value = ("successfully create user")
+          alertBtnMessage.value = ("confirm")
+          isAlertShow.value = true
           email.value = ""
           username.value = ""
           password.value = ""

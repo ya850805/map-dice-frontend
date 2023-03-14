@@ -12,6 +12,7 @@ body {
 
     overflow-x: hidden;
     overflow-y: auto;
+    word-break: break-all;
 }
 
 p {
@@ -24,6 +25,10 @@ a {
     text-decoration: underline;
     cursor: pointer;
     letter-spacing: 1px;
+}
+
+a:hover {
+    color: var(--primary-30);
 }
 
 #app {
@@ -74,6 +79,7 @@ a {
 
     background-color: var(--white);
     border-radius: 16px;
+    box-shadow: 0 0 4px 0 var(--sec-gray);
 }
 
 .review_content {
@@ -103,8 +109,9 @@ a {
 
 .pop_content {
     display: flex;
-    position: absolute;
     flex-direction: column;
+    position: absolute;
+    top: 30%;
     width: calc(100vw - 72px);
     max-width: 448px;
     min-width: auto;
