@@ -12,6 +12,7 @@ body {
 
     overflow-x: hidden;
     overflow-y: auto;
+    word-break: break-all;
 }
 
 p {
@@ -78,6 +79,7 @@ a:hover {
 
     background-color: var(--white);
     border-radius: 16px;
+    box-shadow: 0 0 4px 0 var(--sec-gray);
 }
 
 .review_content {

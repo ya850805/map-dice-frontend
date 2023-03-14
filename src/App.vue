@@ -4,19 +4,23 @@
   <img class="img-bg-bottom" src="./assets/images/bg-bottom.png"/>
   <div class="function-content">
     <div class="img-open"></div>
-    <div class="i18n-block">
-      <i class="i-language"></i>
-      <!--      <p>{{ $t('_lang') }}</p>-->
-      <select class="w-100" v-model="$i18n.locale">
-        <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
-      </select>
-      <i class="i-logout" @click="logout" v-if="loginUser != ''"></i>
-    </div>
+    <div class="flex-row-sb w-100">
+      <div class="flex-row-c w-100" v-if="loginUser != ''">
+        <h4>Hi ~ {{ loginUser }}</h4>
+        <i class="i-logout" @click="logout"></i>
+      </div>
+      <div class="i18n-block">
+        <i class="i-language"></i>
+        <!--      <p>{{ $t('_lang') }}</p>-->
+        <select class="w-100 fz" v-model="$i18n.locale">
+          <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">
+            {{locale}}
+          </option>
+        </select>
 
-    <div class="flex-row-sb" v-if="loginUser != ''">
-      <h4>Hi ~ {{ loginUser }}</h4>
+      </div>
     </div>
-    <div class="w-100" v-else>
+    <div class="w-100" v-if="loginUser == ''">
       <div class="flex-row tab-block">
         <RouterLink to="/login" active-class="red">{{ $t('_login') }}</RouterLink>
         <RouterLink to="/register" active-class="red">{{ $t('_register') }}</RouterLink>
@@ -61,8 +65,8 @@
         <!--            <p class="fz-h5">{{ placeVicinity }}</p>-->
         <!--          </div>-->
         <!--        </div>-->
-
         <button class="btn-sec" @click="getPlaceDetail">{{ $t('_detail') }}</button>
+
         <div v-if="isDetailOpen">
           <div class="flex-row">
             <i class="i-vicinity"></i>
@@ -119,12 +123,22 @@
       </div>
     </div>
   </div>
+  <AlertTheme v-if="isAlertShow" @closeAlert="isAlertShow = false" :alertMessage="alertMessage"
+              :alert-btn-message="alertBtnMessage">
+    <template></template>
+  </AlertTheme>
 </template>
 
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
+import AlertTheme from "@/views/AlertTheme.vue";
+
+//is alert show
+let isAlertShow = ref(false)
+let alertMessage = ref("")
+let alertBtnMessage = ref("")
 
 let loginUser = ref("")
 let type = ref("")
@@ -163,7 +177,9 @@ function updateLoginUser(username: string) {
 
 function dice() {
   if (type.value === "") {
-    alert('Please choose one type.')
+    alertMessage.value = ("Please choose one type")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
   } else {
     getLocationThenDice()
   }
@@ -191,7 +207,9 @@ function getLocationThenDice() {
             })
             .catch(err => {
               if (err.response.status == 401) {
-                alert("login required...")
+                alertMessage.value = ("login required...")
+                alertBtnMessage.value = ("confirm")
+                isAlertShow.value = true
                 window.localStorage.removeItem("jwt")
                 loginUser.value = ""
               }
@@ -199,14 +217,19 @@ function getLocationThenDice() {
       })
       .catch(err => {
         console.log(err)
-        alert('get user location occurs error...')
+        alertMessage.value = ("get user location occurs error...")
+        alertBtnMessage.value = ("confirm")
+        isAlertShow.value = true
       })
 }
 
 function getPlaceDetail() {
   const id = placeId.value
   if (id == '') {
-    alert('please dice first.')
+    console.log(err)
+    alertMessage.value = ("please dice first.")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
@@ -233,7 +256,9 @@ function getPlaceDetail() {
         })
       })
       .catch(err => {
-        alert("get place detail occurs error")
+        alertMessage.value = ("get place detail occurs error")
+        alertBtnMessage.value = ("confirm")
+        isAlertShow.value = true
       })
 }
 

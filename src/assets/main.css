@@ -4,6 +4,8 @@
 @import './layout.css';
 /*可重覆性的元件樣式*/
 @import './modules.css';
+/*RWD*/
+@import './media.css';
 
 
 

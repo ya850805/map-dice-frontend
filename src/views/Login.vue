@@ -28,12 +28,23 @@
     <button class="mt-40" @click="sendForgotPasswordEmail">{{ $t('_sendEmail') }}</button>
   </div>
   <div class="pop_overlay" v-if="showEmail" @click="showEmail=false"></div>
+
+  <AlertTheme v-if="isAlertShow" @closeAlert="isAlertShow = false" :alertMessage="alertMessage"
+              :alert-btn-message="alertBtnMessage">
+    <template></template>
+  </AlertTheme>
 </template>
 
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL} from "@/constant/MapDiceConstant";
+import AlertTheme from "@/views/AlertTheme.vue";
+
+//is alert show
+let isAlertShow = ref(false)
+let alertMessage = ref("")
+let alertBtnMessage = ref("")
 
 let username = ref("")
 let password = ref("")
@@ -43,14 +54,19 @@ const emit = defineEmits(['updateLoginUser'])
 let showEmail = ref(false)
 let email = ref("")
 
+
 function login() {
   if (username.value == "") {
-    alert("username is required")
+    alertMessage.value = ("username is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
   if (password.value == "") {
-    alert("password is required")
+    alertMessage.value = ("password is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
     return
   }
 
@@ -65,7 +81,6 @@ function login() {
               .then(res => {
                 emit('updateLoginUser', res.data.data)
               })
-
           alert(res.data.data)
           username.value = ""
           password.value = ""
@@ -83,12 +98,16 @@ function sendForgotPasswordEmail() {
         if (res.data.code != 200) {
           alert(res.data.data)
         } else {
-          alert('reset password mail has sent, please check')
+          alertMessage.value = ("reset password mail has sent, please check")
+          alertBtnMessage.value = ("confirm")
+          isAlertShow.value = true
         }
       })
       .catch(err => {
         console.log(err)
-        alert('send email occurs error')
+        alertMessage.value = ("send email occurs error")
+        alertBtnMessage.value = ("confirm")
+        isAlertShow.value = true
       })
 }
 </script>
