@@ -93,6 +93,13 @@ function login() {
 }
 
 function sendForgotPasswordEmail() {
+  if (email.value == '') {
+    alertMessage.value = ("email is required")
+    alertBtnMessage.value = ("confirm")
+    isAlertShow.value = true
+    return
+  }
+
   axios.post(`${BACKEND_URL}/users/forgotPwd/${email.value}`)
       .then(res => {
         if (res.data.code != 200) {
