@@ -93,7 +93,7 @@ function login() {
 }
 
 function sendForgotPasswordEmail() {
-  if (email.value == '') {
+  if (email.value.trim() == '') {
     alertMessage.value = ("email is required")
     alertBtnMessage.value = ("confirm")
     isAlertShow.value = true

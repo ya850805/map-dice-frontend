@@ -226,7 +226,6 @@ function getLocationThenDice() {
 function getPlaceDetail() {
   const id = placeId.value
   if (id == '') {
-    console.log(err)
     alertMessage.value = ("please dice first.")
     alertBtnMessage.value = ("confirm")
     isAlertShow.value = true
