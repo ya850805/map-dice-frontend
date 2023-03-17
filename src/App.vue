@@ -193,7 +193,6 @@ function getLocationThenDice() {
 
         axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
             .then(res => {
-              console.log(res)
               if (res.data.code == 200) {
                 const data = res.data.data
                 placeId.value = data.place_id
@@ -216,7 +215,6 @@ function getLocationThenDice() {
             })
       })
       .catch(err => {
-        console.log(err)
         alertMessage.value = ("get user location occurs error...")
         alertBtnMessage.value = ("confirm")
         isAlertShow.value = true
@@ -236,7 +234,6 @@ function getPlaceDetail() {
   axios.get(`${BACKEND_URL}/place/${id}`)
       .then(res => {
         const data = res.data.data
-        console.log(res)
         detailAddress.value = data.formatted_address
         detailUrl.value = data.url
         detailWebsite.value = data.website

@@ -111,7 +111,6 @@ function sendForgotPasswordEmail() {
         }
       })
       .catch(err => {
-        console.log(err)
         alertMessage.value = ("send email occurs error")
         alertBtnMessage.value = ("confirm")
         isAlertShow.value = true
