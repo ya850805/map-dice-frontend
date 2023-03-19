@@ -266,9 +266,5 @@ function logout() {
 </script>
 
 <style scoped>
-/*TODO*/
-.red {
-  color: red;
-}
 
 </style>
