@@ -8,6 +8,8 @@
   "_username": "用戶名",
   "_password": "密碼",
   "_confirmPassword": "確認密碼",
+  "_resetPassword": "重設密碼",
+  "_confirmResetPassword": "確認重設密碼",
   "_placeType": "地點類型",
   "_restaurant": "餐廳",
   "_dice": "骰",
