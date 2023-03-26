@@ -23,16 +23,25 @@
 </template>
 
 <script setup>
-import {useRoute} from "vue-router/dist/vue-router";
-import {ref} from "vue";
+import {useRoute, useRouter} from "vue-router/dist/vue-router";
+import {onMounted, ref} from "vue";
 
 const route = useRoute()
-const uuid = route.params.uuid
+const router = useRouter()
+let uuid
 
 let password = ref("")
 let confirmPassword = ref("")
 let showPassword = ref(false)
 let showConfirmPassword = ref(false)
+
+onMounted(() => {
+  uuid = route.params.uuid
+  if(!validUUID(uuid)) {
+    alert('uuid is invalid')
+    router.push("/")
+  }
+})
 
 function resetPassword() {
   console.log(uuid)
@@ -41,6 +50,11 @@ function resetPassword() {
   //TODO send request
 }
 
+function validUUID(str) {
+  const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
+
+  return regexExp.test(str)
+}
 </script>
 
 <style scoped>
