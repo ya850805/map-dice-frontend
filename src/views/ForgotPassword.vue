@@ -25,6 +25,8 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import {onMounted, ref} from "vue";
+import axios from "axios";
+import {BACKEND_URL} from "@/constant/MapDiceConstant";
 
 const route = useRoute()
 const router = useRouter()
@@ -47,7 +49,25 @@ function resetPassword() {
   console.log(uuid)
   console.log(password.value)
   console.log(confirmPassword.value)
-  //TODO send request
+
+  if(password.value != confirmPassword.value) {
+    alert('confirm password not match')
+    return
+  }
+
+  const updatePwdRequest = {
+    uuid: uuid.value,
+    password: password.value
+  }
+
+  axios.put(`${BACKEND_URL}/users/updatePwd`, updatePwdRequest)
+      .then(res => {
+        alert('update password success!')
+        router.push('/login')
+      }).catch(err => {
+        console.log(err)
+        alert("update password error...")
+  })
 }
 
 function validUUID(str) {
