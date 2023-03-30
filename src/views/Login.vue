@@ -108,6 +108,9 @@ function sendForgotPasswordEmail() {
           alertMessage.value = ("reset password mail has sent, please check")
           alertBtnMessage.value = ("confirm")
           isAlertShow.value = true
+
+          //close send email modal
+          showEmail.value = false
         }
       })
       .catch(err => {
