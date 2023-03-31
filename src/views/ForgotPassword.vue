@@ -46,9 +46,6 @@ onMounted(() => {
 })
 
 function resetPassword() {
-  console.log(uuid)
-  console.log(password.value)
-  console.log(confirmPassword.value)
 
   if(password.value != confirmPassword.value) {
     alert('confirm password not match')
@@ -62,11 +59,19 @@ function resetPassword() {
 
   axios.put(`${BACKEND_URL}/users/updatePwd`, updatePwdRequest)
       .then(res => {
-        alert('update password success!')
-        router.push('/login')
+        if(res.data.code == 200) {
+          alert('update password success!')
+          router.push('/login')
+        } else {
+          alert("update password error..." + res.data.data)
+          password.value = ''
+          confirmPassword.value = ''
+        }
       }).catch(err => {
         console.log(err)
         alert("update password error...")
+        password.value = ''
+        confirmPassword.value = ''
   })
 }
 
