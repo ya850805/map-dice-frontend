@@ -191,7 +191,7 @@ function getLocationThenDice() {
         const latitude = res.data.lat
         const longitude = res.data.lon
 
-        axios.get(`${BACKEND_URL}/dice?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
+        axios.get(`${BACKEND_URL}/dice/nearby?latitude=${latitude}&longitude=${longitude}&radius=${RADIUS}&type=${type.value}`)
             .then(res => {
               if (res.data.code == 200) {
                 const data = res.data.data
