@@ -68,6 +68,8 @@
         <button class="btn-sec" @click="getPlaceDetail">{{ $t('_detail') }}</button>
 
         <div v-if="isDetailOpen">
+          <button>{{ $t('_addCollect') }}</button>
+
           <div class="flex-row">
             <i class="i-vicinity"></i>
             <div class="flex-col">
