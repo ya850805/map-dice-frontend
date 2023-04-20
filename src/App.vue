@@ -68,7 +68,7 @@
         <button class="btn-sec" @click="getPlaceDetail">{{ $t('_detail') }}</button>
 
         <div v-if="isDetailOpen">
-          <button>{{ $t('_addCollect') }}</button>
+          <button @click="addCollect">{{ $t('_addCollect') }}</button>
 
           <div class="flex-row">
             <i class="i-vicinity"></i>
@@ -264,6 +264,20 @@ function logout() {
   axios.defaults.headers.common['Authorization'] = ""
   window.localStorage.removeItem("jwt")
   loginUser.value = ''
+}
+
+function addCollect() {
+  const body = {
+    placeId: placeId.value
+  }
+  axios.post(`${BACKEND_URL}/users-collect/`, body)
+      .then(res => {
+        alert('Add place to collection success')
+      })
+      .catch(err => {
+        console.log(err)
+        alert('Add place to collection failure...')
+      })
 }
 </script>
 
