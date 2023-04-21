@@ -8,6 +8,7 @@
       <div class="flex-row-c w-100" v-if="loginUser != ''">
         <h4>Hi ~ {{ loginUser }}</h4>
         <i class="i-logout" @click="logout"></i>
+        <button>{{ $t('_showCollect') }}</button>
       </div>
       <div class="i18n-block">
         <i class="i-language"></i>

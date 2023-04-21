@@ -18,5 +18,6 @@
   "_phoneNumber": "Phone number",
   "_googleMapUrl": "Google maps link",
   "_website": "website",
-  "_addCollect": "Add to collection"
+  "_addCollect": "Add to collection",
+  "_showCollect": "Show collection"
 }
