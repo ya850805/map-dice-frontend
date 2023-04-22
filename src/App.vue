@@ -8,7 +8,7 @@
       <div class="flex-row-c w-100" v-if="loginUser != ''">
         <h4>Hi ~ {{ loginUser }}</h4>
         <i class="i-logout" @click="logout"></i>
-        <button>{{ $t('_showCollect') }}</button>
+        <button @click="showCollection">{{ $t('_showCollect') }}</button>
       </div>
       <div class="i18n-block">
         <i class="i-language"></i>
@@ -130,6 +130,10 @@
               :alert-btn-message="alertBtnMessage">
     <template></template>
   </AlertTheme>
+
+  <Collection v-if="isCollectionShow">
+    <template></template>
+  </Collection>
 </template>
 
 <script setup lang="ts">
@@ -137,11 +141,15 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BACKEND_URL, GET_LOCATION_API_URL, RADIUS} from "@/constant/MapDiceConstant";
 import AlertTheme from "@/views/AlertTheme.vue";
+import Collection from "@/views/Collection.vue";
 
 //is alert show
 let isAlertShow = ref(false)
 let alertMessage = ref("")
 let alertBtnMessage = ref("")
+
+//show collection
+let isCollectionShow = ref(false)
 
 let loginUser = ref("")
 let type = ref("")
@@ -279,6 +287,10 @@ function addCollect() {
         console.log(err)
         alert('Add place to collection failure...')
       })
+}
+
+function showCollection() {
+  isCollectionShow.value = true
 }
 </script>
 
