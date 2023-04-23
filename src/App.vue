@@ -150,6 +150,7 @@ let alertBtnMessage = ref("")
 
 //show collection
 let isCollectionShow = ref(false)
+let collectPlaces = ref([])
 
 let loginUser = ref("")
 let type = ref("")
@@ -290,6 +291,13 @@ function addCollect() {
 }
 
 function showCollection() {
+  axios.get(`${BACKEND_URL}/users-collect/`)
+      .then(res => {
+        const places: never[] = res.data.data
+        places.forEach(p => collectPlaces.value.push(p))
+      })
+
+  console.log(collectPlaces.value)
   isCollectionShow.value = true
 }
 </script>
