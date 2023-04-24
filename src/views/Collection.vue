@@ -1,13 +1,11 @@
 <template>
   <div class="pop_content">
-    Collection
+    {{ collectPlaces }}
   </div>
 </template>
 
-<script>
-export default {
-  name: "Collection"
-}
+<script setup>
+defineProps(['collectPlaces'])
 </script>
 
 <style scoped>

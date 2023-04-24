@@ -131,7 +131,7 @@
     <template></template>
   </AlertTheme>
 
-  <Collection v-if="isCollectionShow">
+  <Collection v-if="isCollectionShow" :collectPlaces="collectPlaces">
     <template></template>
   </Collection>
 </template>
