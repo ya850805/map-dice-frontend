@@ -19,5 +19,6 @@
   "_googleMapUrl": "Google maps link",
   "_website": "website",
   "_addCollect": "Add to collection",
-  "_showCollect": "Show collection"
+  "_showCollect": "Show collection",
+  "_removeCollect": "Remove collection"
 }
