@@ -131,7 +131,7 @@
     <template></template>
   </AlertTheme>
 
-  <Collection v-if="isCollectionShow" :collectPlaces="collectPlaces">
+  <Collection v-if="isCollectionShow" :collectPlaces="collectPlaces" @removeCollect="removeCollect">
     <template></template>
   </Collection>
 </template>
@@ -299,6 +299,12 @@ function showCollection() {
 
   console.log(collectPlaces.value)
   isCollectionShow.value = true
+}
+
+
+function removeCollect(id: string) {
+  //@ts-ignore
+  collectPlaces.value = collectPlaces.value.filter(p => p.id != id)
 }
 </script>
 
