@@ -131,7 +131,7 @@
     <template></template>
   </AlertTheme>
 
-  <Collection v-if="isCollectionShow" :collectPlaces="collectPlaces" @removeCollect="removeCollect">
+  <Collection v-if="isCollectionShow" @closeAlert="isCollectionShow = false" :collectPlaces="collectPlaces" @removeCollect="removeCollect">
     <template></template>
   </Collection>
 </template>
@@ -291,13 +291,13 @@ function addCollect() {
 }
 
 function showCollection() {
+  collectPlaces.value = []
   axios.get(`${BACKEND_URL}/users-collect/`)
       .then(res => {
         const places: never[] = res.data.data
         places.forEach(p => collectPlaces.value.push(p))
       })
 
-  console.log(collectPlaces.value)
   isCollectionShow.value = true
 }
 

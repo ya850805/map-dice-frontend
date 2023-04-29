@@ -1,5 +1,6 @@
 <template>
   <div class="pop_content">
+    <i class="i-cancel"  @click="$emit('closeAlert')"></i>
     <div v-for="place in collectPlaces">
       <a :href="place.url" target="_blank">{{ place.name }}</a><br>
       網站：{{ place.website }}<br>
